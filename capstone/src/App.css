@@ -1,0 +1,9 @@
+.form-control:focus {
+  border-color: inherit;
+  box-shadow: none;
+  outline: none;
+}
+
+.hover-primary:hover {
+  background-color: rgb(73, 0, 200);
+}
