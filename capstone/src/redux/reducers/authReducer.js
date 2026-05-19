@@ -6,7 +6,7 @@ import {
   REGISTER_LOADING,
   REGISTER_ERROR,
   LOGOUT,
-} from "../actions/authActions"
+} from "../actions/authAction"
 
 const initialState = {
   token: localStorage.getItem("token") || null,
