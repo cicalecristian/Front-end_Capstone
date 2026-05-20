@@ -32,7 +32,8 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        token: action.payload,
+        token: action.payload.token,
+        user: action.payload.user,
       }
 
     case LOGIN_ERROR:

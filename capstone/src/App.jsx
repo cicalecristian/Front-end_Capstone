@@ -4,6 +4,7 @@ import store from "./redux/store/store.js"
 import { Container } from "react-bootstrap"
 import { Route, Routes } from "react-router-dom"
 import RegisterPage from "./components/RegisterPage.jsx"
+import Home from "./components/Home.jsx"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </Container>
       </Provider>

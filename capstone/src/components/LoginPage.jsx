@@ -5,28 +5,33 @@ import { Button, Col, Form, Row, Spinner } from "react-bootstrap"
 import { FaFacebookF } from "react-icons/fa"
 import { FaTwitter } from "react-icons/fa"
 import { FaGoogle } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaCircleExclamation } from "react-icons/fa6"
 
 const LoginPage = () => {
   const dispatch = useDispatch()
   const error = useSelector((state) => state.auth.error)
   const loading = useSelector((state) => state.auth.loading)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    dispatch(loginAction(formData))
+    const success = await dispatch(loginAction(formData))
+
+    if (success) {
+      navigate("/profile")
+    }
   }
 
   return (
-    <Row className=" min-vh-100 align-items-center">
-      <Col>
+    <Row className=" min-vh-100 align-items-center justify-content-center">
+      <Col md={8}>
         <div className=" bg-dark d-flex flex-column align-items-center rounded-4">
           <h2 className=" text-white mt-5">LOGIN</h2>
           <p className=" text-secondary mb-5 mt-2 fw-semibold">
@@ -68,13 +73,14 @@ const LoginPage = () => {
                 type="password"
                 placeholder="Password"
                 value={formData.password}
-                onChange={(e) =>
+                onChange={(e) => {
+                  dispatch(clearErrorAction())
+
                   setFormData({
                     ...formData,
-
                     password: e.target.value,
                   })
-                }
+                }}
               />
             </div>
             <a

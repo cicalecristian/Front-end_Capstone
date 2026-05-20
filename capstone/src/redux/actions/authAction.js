@@ -1,5 +1,3 @@
-import { data } from "react-router-dom"
-
 export const LOGIN = "LOGIN"
 export const LOGIN_LOADING = "LOGIN_LOADING"
 export const LOGIN_ERROR = "LOGIN_ERROR"
@@ -20,23 +18,23 @@ export const loginAction = (credentials) => {
     try {
       const response = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(credentials),
       })
 
-      if (response.ok) {
-        const data = await response.json()
+      const data = await response.json()
 
+      if (response.ok) {
         localStorage.setItem("token", data.token)
 
         dispatch({
           type: LOGIN,
           payload: data.token,
         })
+
+        return true
       } else {
         throw new Error(data.message)
       }
@@ -44,7 +42,7 @@ export const loginAction = (credentials) => {
       let errorMessage = error.message
 
       if (error.message === "Failed to fetch") {
-        errorMessage = "Impossibile connettersi al server"
+        errorMessage = "Unable to connect to the server"
       }
 
       console.log(error)
@@ -53,6 +51,8 @@ export const loginAction = (credentials) => {
         type: LOGIN_ERROR,
         payload: errorMessage,
       })
+
+      return false
     }
   }
 }
