@@ -66,7 +66,6 @@ export const registerAction = (userData) => {
     try {
       const response = await fetch("http://localhost:3001/auth/register", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
@@ -74,18 +73,25 @@ export const registerAction = (userData) => {
         body: JSON.stringify(userData),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
         dispatch({
           type: REGISTER,
         })
       } else {
-        throw new Error("Errore registrazione")
+        throw new Error(data.message)
       }
     } catch (error) {
-      console.log(error)
+      let errorMessage = error.message
+
+      if (error.message === "Failed to fetch") {
+        errorMessage = "Unable to connect to server"
+      }
 
       dispatch({
         type: REGISTER_ERROR,
+        payload: errorMessage,
       })
     }
   }

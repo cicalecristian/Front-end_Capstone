@@ -25,7 +25,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: false,
+        error: null,
       }
 
     case LOGIN:
@@ -39,7 +39,7 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_ERROR:
       return {
         ...state,
-        loading: false,
+        loading: null,
         error: action.payload,
       }
 
@@ -47,7 +47,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: false,
+        error: null,
       }
 
     case REGISTER:
@@ -60,7 +60,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload,
       }
 
     case LOGOUT:
