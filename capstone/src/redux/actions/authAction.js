@@ -1,3 +1,5 @@
+import { data } from "react-router-dom"
+
 export const LOGIN = "LOGIN"
 export const LOGIN_LOADING = "LOGIN_LOADING"
 export const LOGIN_ERROR = "LOGIN_ERROR"
@@ -7,6 +9,7 @@ export const REGISTER_LOADING = "REGISTER_LOADING"
 export const REGISTER_ERROR = "REGISTER_ERROR"
 
 export const LOGOUT = "LOGOUT"
+export const CLEAR_ERROR = "CLEAR_ERROR"
 
 export const loginAction = (credentials) => {
   return async (dispatch) => {
@@ -35,13 +38,20 @@ export const loginAction = (credentials) => {
           payload: data.token,
         })
       } else {
-        throw new Error("Errore login")
+        throw new Error(data.message)
       }
     } catch (error) {
+      let errorMessage = error.message
+
+      if (error.message === "Failed to fetch") {
+        errorMessage = "Impossibile connettersi al server"
+      }
+
       console.log(error)
 
       dispatch({
         type: LOGIN_ERROR,
+        payload: errorMessage,
       })
     }
   }
@@ -86,5 +96,11 @@ export const logoutAction = () => {
 
   return {
     type: LOGOUT,
+  }
+}
+
+export const clearErrorAction = () => {
+  return {
+    type: CLEAR_ERROR,
   }
 }

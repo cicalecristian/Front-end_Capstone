@@ -6,6 +6,7 @@ import {
   REGISTER_LOADING,
   REGISTER_ERROR,
   LOGOUT,
+  CLEAR_ERROR,
 } from "../actions/authAction"
 
 const initialState = {
@@ -38,7 +39,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload,
       }
 
     case REGISTER_LOADING:
@@ -66,6 +67,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         token: null,
         user: null,
+      }
+
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       }
 
     default:
