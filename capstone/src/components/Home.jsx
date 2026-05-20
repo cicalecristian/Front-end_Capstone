@@ -1,5 +1,11 @@
+import TrendingSongs from "./TrendingSongs"
+
 const Home = () => {
-  return <></>
+  return (
+    <>
+      <TrendingSongs />
+    </>
+  )
 }
 
 export default Home

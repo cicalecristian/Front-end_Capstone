@@ -12,10 +12,14 @@ export const getSongsAction = () => {
     try {
       const token = localStorage.getItem("token")
 
+      const headers = {}
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`
+      }
+
       const response = await fetch("http://localhost:3001/songs", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers,
       })
 
       const data = await response.json()

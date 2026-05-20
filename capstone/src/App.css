@@ -11,3 +11,8 @@
 .custom-input::placeholder {
   color: white;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none;
+}
