@@ -7,6 +7,7 @@ import { Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import { Link } from "react-router-dom"
+import { FaCircleExclamation } from "react-icons/fa6"
 
 const TrendingSongs = () => {
   const dispatch = useDispatch()
@@ -19,14 +20,27 @@ const TrendingSongs = () => {
     dispatch(getSongsAction())
   }, [])
 
-  console.log(songs)
-
   if (loading) {
-    return <Spinner animation="border" />
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" variant="black" />
+      </div>
+    )
   }
 
   if (error) {
-    return <p>{error}</p>
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5">
+          <FaCircleExclamation />
+          {error}
+        </div>
+      </div>
+    )
+  }
+
+  if (!songs) {
+    return null
   }
 
   return (
