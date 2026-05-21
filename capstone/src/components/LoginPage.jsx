@@ -25,7 +25,7 @@ const LoginPage = () => {
     const success = await dispatch(loginAction(formData))
 
     if (success) {
-      navigate("/profile")
+      navigate("/home")
     }
   }
 

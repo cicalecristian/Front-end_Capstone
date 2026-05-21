@@ -17,14 +17,30 @@
   display: none;
 }
 
+.swiper {
+  overflow-y: visible;
+  overflow-x: clip;
+  padding: 20px 10px;
+}
+
 .song-title {
-  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
 }
 
 .song-artistName {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-size: clamp(0.7rem, 1vw, 1rem);
 }
 
 .song-genre {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-size: clamp(0.75rem, 1.4vw, 1.05rem);
+}
+
+.card-effect {
+  transition: all 0.5s ease;
+  background-color: #181818;
+}
+
+.card-effect:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }

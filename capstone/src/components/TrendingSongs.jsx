@@ -44,58 +44,63 @@ const TrendingSongs = () => {
   }
 
   return (
-    <Swiper
-      className=" mt-5"
-      modules={[Navigation]}
-      navigation
-      spaceBetween={20}
-      breakpoints={{
-        0: {
-          slidesPerView: 2,
-        },
+    <>
+      <div>
+        <h3 className=" fst-italic m-0 px-3">TRENDING SONGS</h3>
+      </div>
+      <Swiper
+        className=" px-3"
+        modules={[Navigation]}
+        navigation
+        spaceBetween={20}
+        breakpoints={{
+          0: {
+            slidesPerView: 3,
+          },
 
-        576: {
-          slidesPerView: 3,
-        },
+          576: {
+            slidesPerView: 4,
+          },
 
-        768: {
-          slidesPerView: 4,
-        },
+          768: {
+            slidesPerView: 5,
+          },
 
-        992: {
-          slidesPerView: 5,
-        },
-      }}
-    >
-      {songs.map((song) => (
-        <SwiperSlide key={song.id}>
-          <Link to={`/songs/${song.id}`} className="text-decoration-none">
-            <Card className=" border-0 bg-transparent h-100">
-              <div>
-                <img
-                  src={song.cover}
-                  alt={song.title}
-                  className=" w-100 rounded-top"
-                />
-              </div>
+          992: {
+            slidesPerView: 7,
+          },
+        }}
+      >
+        {songs.map((song) => (
+          <SwiperSlide key={song.id}>
+            <Link to={`/songs/${song.id}`} className="text-decoration-none">
+              <Card className=" bg-transparent card-effect">
+                <div>
+                  <img
+                    src={song.cover}
+                    alt={song.title}
+                    className=" w-100 rounded-top"
+                  />
+                </div>
 
-              <Card.Body className="px-0 pt-2 bg-dark rounded-bottom pt-3 pb-3">
-                <Card.Title className=" text-white text-center my-3 song-title text-truncate">
-                  {song.title}
-                </Card.Title>
-                <Card.Text className=" text-white text-center song-artistName">
-                  {song.artists.map((artist) => artist.artistName)}
-                </Card.Text>
+                <Card.Body className=" p-2 bg-dark rounded-bottom">
+                  <Card.Title className=" text-white text-center mb-3 mt-2 song-title text-truncate">
+                    {song.title}
+                  </Card.Title>
+                  <Card.Text className=" text-white text-center song-artistName">
+                    {song.artists.map((artist) => artist.artistName)}
+                  </Card.Text>
 
-                <Card.Text className=" text-white text-center song-genre mb-3">
-                  {song.genre}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Link>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+                  <Card.Text className=" text-white text-center song-genre mb-2">
+                    {song.genre}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
   )
 }
 
