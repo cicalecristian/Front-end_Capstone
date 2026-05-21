@@ -32,8 +32,8 @@ const RegisterPage = () => {
   }
 
   return (
-    <Row className=" min-vh-100 align-items-center justify-content-center">
-      <Col md={8}>
+    <Row className=" min-vh-100 align-items-center justify-content-center g-0">
+      <Col xs={11} sm={9} md={7} lg={5}>
         <div className=" bg-dark d-flex flex-column align-items-center rounded-4">
           <h2 className=" text-white mt-5">REGISTER</h2>
           <p className=" text-secondary mb-5 mt-2 fw-semibold">

@@ -16,3 +16,15 @@
 .swiper-button-next {
   display: none;
 }
+
+.song-title {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+}
+
+.song-artistName {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+.song-genre {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
