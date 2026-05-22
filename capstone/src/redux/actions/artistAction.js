@@ -6,7 +6,7 @@ export const GET_SINGLE_ARTIST = "GET_SINGLE_ARTIST"
 export const GET_SINGLE_ARTIST_LOADING = "GET_SINGLE_ARTIST_LOADING"
 export const GET_SINGLE_ARTIST_ERROR = "GET_SINGLE_ARTIST_ERROR"
 
-export const getArtistAction = () => {
+export const getArtistsAction = () => {
   return async (dispatch) => {
     dispatch({
       type: GET_ARTISTS_LOADING,
@@ -63,7 +63,17 @@ export const getSingleArtistAction = (id) => {
     })
 
     try {
-      const response = await fetch(`http://localhost:3001/artists/${id}`)
+      const token = localStorage.getItem("token")
+
+      const headers = {}
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`
+      }
+
+      const response = await fetch(`http://localhost:3001/artists/${id}`, {
+        headers,
+      })
 
       const data = await response.json()
 

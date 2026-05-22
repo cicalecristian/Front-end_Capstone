@@ -23,15 +23,18 @@
   padding: 20px 10px;
 }
 
-.song-title {
+.song-title,
+.artist-artistName {
   font-size: clamp(0.8rem, 1.5vw, 1.2rem);
 }
 
-.song-artistName {
+.song-artistName,
+.artist-nationality {
   font-size: clamp(0.7rem, 1vw, 1rem);
 }
 
-.song-genre {
+.song-genre,
+.artist-genre {
   font-size: clamp(0.75rem, 1.4vw, 1.05rem);
 }
 

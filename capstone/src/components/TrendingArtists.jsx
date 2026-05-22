@@ -1,0 +1,108 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getArtistsAction } from "../redux/actions/artistAction"
+import { Card, Spinner } from "react-bootstrap"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/navigation"
+import { Link } from "react-router-dom"
+import { FaCircleExclamation } from "react-icons/fa6"
+
+const TrendingArtists = () => {
+  const dispatch = useDispatch()
+
+  const artists = useSelector((state) => state.artists.artists)
+  const error = useSelector((state) => state.artists.error)
+  const loading = useSelector((state) => state.artists.loading)
+
+  console.log(artists)
+
+  useEffect(() => {
+    dispatch(getArtistsAction())
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" variant="black" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5">
+          <FaCircleExclamation />
+          {error}
+        </div>
+      </div>
+    )
+  }
+
+  if (!artists) {
+    return null
+  }
+  return (
+    <>
+      <div>
+        <h3 className=" fst-italic m-0 px-3">TRENDING ARTISTS</h3>
+      </div>
+      <Swiper
+        className=" px-3"
+        modules={[Navigation]}
+        navigation
+        spaceBetween={20}
+        breakpoints={{
+          0: {
+            slidesPerView: 3,
+          },
+
+          576: {
+            slidesPerView: 4,
+          },
+
+          768: {
+            slidesPerView: 5,
+          },
+
+          992: {
+            slidesPerView: 7,
+          },
+        }}
+      >
+        {artists.map((artist) => (
+          <SwiperSlide key={artist.id}>
+            <Link to={`/artists/${artist.id}`} className="text-decoration-none">
+              <Card className=" bg-transparent card-effect">
+                <div>
+                  <img
+                    src={artist.avatar}
+                    alt={artist.title}
+                    className=" w-100 rounded-top"
+                  />
+                </div>
+
+                <Card.Body className=" p-2 bg-dark rounded-bottom">
+                  <Card.Title className=" text-white text-center mb-3 mt-2 artist-artistName text-truncate">
+                    {artist.artistName}
+                  </Card.Title>
+                  <Card.Text className=" text-white text-center artist-nationality">
+                    {artist.nationality}
+                  </Card.Text>
+
+                  <Card.Text className=" text-white text-center artist-genre mb-2">
+                    {artist.genre}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
+  )
+}
+
+export default TrendingArtists
