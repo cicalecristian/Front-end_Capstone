@@ -57,19 +57,22 @@ const TrendingSongs = () => {
         spaceBetween={20}
         breakpoints={{
           0: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
 
           576: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
 
           768: {
-            slidesPerView: 5,
+            slidesPerView: 4,
           },
 
           992: {
-            slidesPerView: 7,
+            slidesPerView: 5,
+          },
+          1200: {
+            slidesPerView: 6,
           },
         }}
       >

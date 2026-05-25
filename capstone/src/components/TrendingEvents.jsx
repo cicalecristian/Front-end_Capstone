@@ -56,19 +56,23 @@ const TrendingEvents = () => {
         spaceBetween={20}
         breakpoints={{
           0: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
 
           576: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
 
           768: {
-            slidesPerView: 5,
+            slidesPerView: 4,
           },
 
           992: {
-            slidesPerView: 7,
+            slidesPerView: 5,
+          },
+
+          1200: {
+            slidesPerView: 6,
           },
         }}
       >
@@ -88,7 +92,7 @@ const TrendingEvents = () => {
                   <Card.Title className=" text-white text-center mb-3 mt-2 event-title text-truncate">
                     {event.title}
                   </Card.Title>
-                  <Card.Text className=" text-white text-center event-city fw-lighter">
+                  <Card.Text className=" text-white text-center event-city fw-lighter text-truncate">
                     city: {event.city}
                   </Card.Text>
 
