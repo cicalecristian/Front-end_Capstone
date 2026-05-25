@@ -84,15 +84,15 @@ const TrendingArtists = () => {
                   />
                 </div>
 
-                <Card.Body className=" p-2 bg-dark rounded-bottom">
+                <Card.Body className=" p-2 bg-black rounded-bottom bg-gradient">
                   <Card.Title className=" text-white text-center mb-3 mt-2 artist-artistName text-truncate">
                     {artist.artistName}
                   </Card.Title>
-                  <Card.Text className=" text-white text-center artist-nationality">
+                  <Card.Text className=" text-white text-center artist-nationality fw-light">
                     {artist.nationality}
                   </Card.Text>
 
-                  <Card.Text className=" text-white text-center artist-genre mb-2">
+                  <Card.Text className=" text-white text-center artist-genre mb-2 font-monospace">
                     {artist.genre}
                   </Card.Text>
                 </Card.Body>

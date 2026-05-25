@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getSongsAction } from "../redux/actions/songAction"
+import { getEventsAction } from "../redux/actions/eventAction"
 import { Card, Spinner } from "react-bootstrap"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
@@ -9,17 +9,17 @@ import "swiper/css/navigation"
 import { Link } from "react-router-dom"
 import { FaCircleExclamation } from "react-icons/fa6"
 
-const TrendingSongs = () => {
+const TrendingEvents = () => {
   const dispatch = useDispatch()
 
-  const songs = useSelector((state) => state.songs.songs)
-  const error = useSelector((state) => state.songs.error)
-  const loading = useSelector((state) => state.songs.loading)
+  const events = useSelector((state) => state.events.events)
+  const error = useSelector((state) => state.events.error)
+  const loading = useSelector((state) => state.events.loading)
 
-  console.log(songs)
+  console.log(events)
 
   useEffect(() => {
-    dispatch(getSongsAction())
+    dispatch(getEventsAction())
   }, [])
 
   if (loading) {
@@ -41,14 +41,13 @@ const TrendingSongs = () => {
     )
   }
 
-  if (!songs) {
+  if (!events) {
     return null
   }
-
   return (
     <>
       <div>
-        <h3 className=" fst-italic m-0 px-3">TRENDING SONGS</h3>
+        <h3 className=" fst-italic m-0 px-3">TRENDING EVENTS</h3>
       </div>
       <Swiper
         className=" px-3"
@@ -73,28 +72,28 @@ const TrendingSongs = () => {
           },
         }}
       >
-        {songs.map((song) => (
-          <SwiperSlide key={song.id}>
-            <Link to={`/songs/${song.id}`} className="text-decoration-none">
+        {events.map((event) => (
+          <SwiperSlide key={event.id}>
+            <Link to={`/events/${event.id}`} className="text-decoration-none">
               <Card className=" bg-transparent card-effect">
                 <div>
                   <img
-                    src={song.cover}
-                    alt={song.title}
+                    src={event.cover}
+                    alt={event.title}
                     className=" w-100 rounded-top"
                   />
                 </div>
 
                 <Card.Body className=" p-2 bg-black rounded-bottom bg-gradient">
-                  <Card.Title className=" text-white text-center mb-3 mt-2 song-title text-truncate">
-                    {song.title}
+                  <Card.Title className=" text-white text-center mb-3 mt-2 event-title text-truncate">
+                    {event.title}
                   </Card.Title>
-                  <Card.Text className=" text-white text-center song-artistName fw-light">
-                    {song.artists.map((artist) => artist.artistName)}
+                  <Card.Text className=" text-white text-center event-city fw-lighter">
+                    city: {event.city}
                   </Card.Text>
 
-                  <Card.Text className=" text-white text-center song-genre mb-2 font-monospace">
-                    {song.genre}
+                  <Card.Text className=" text-white text-center event-date mb-2 font-monospace">
+                    {event.date}
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -106,4 +105,4 @@ const TrendingSongs = () => {
   )
 }
 
-export default TrendingSongs
+export default TrendingEvents

@@ -28,7 +28,7 @@ const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        songs: action.payload,
+        events: action.payload,
       }
 
     case GET_EVENTS_ERROR:

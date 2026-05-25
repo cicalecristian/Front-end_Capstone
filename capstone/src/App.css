@@ -24,17 +24,20 @@
 }
 
 .song-title,
-.artist-artistName {
+.artist-artistName,
+.event-title {
   font-size: clamp(0.8rem, 1.5vw, 1.2rem);
 }
 
 .song-artistName,
-.artist-nationality {
+.artist-nationality,
+.event-city {
   font-size: clamp(0.7rem, 1vw, 1rem);
 }
 
 .song-genre,
-.artist-genre {
+.artist-genre,
+.event-date {
   font-size: clamp(0.75rem, 1.4vw, 1.05rem);
 }
 
