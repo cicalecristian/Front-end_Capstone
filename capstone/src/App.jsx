@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom"
 import RegisterPage from "./components/RegisterPage.jsx"
 import Home from "./components/Home.jsx"
 import SongDetails from "./components/SongDetails.jsx"
+import ArtistDetails from "./components/ArtistDetails.jsx"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/songs/:id" element={<SongDetails />} />
+        <Route path="/artists/:id" element={<ArtistDetails />} />
       </Routes>
     </Provider>
   )
