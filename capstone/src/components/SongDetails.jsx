@@ -23,8 +23,9 @@ const SongDetails = () => {
 
   if (loading) {
     return (
-      <div className="vh-100 d-flex justify-content-center align-items-center">
-        <Spinner animation="border" variant="black" />
+      <div className="loading-container">
+        <Spinner animation="border" className="custom-spinner" />
+        <p className="loading-text">Just Loading...</p>
       </div>
     )
   }
@@ -32,7 +33,7 @@ const SongDetails = () => {
   if (error) {
     return (
       <div className="vh-100 d-flex justify-content-center align-items-center">
-        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5 bg-dark p-4 rounded-4">
+        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5 bg-info p-3 rounded-3 error-box">
           <FaCircleExclamation />
           {error}
         </div>

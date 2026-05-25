@@ -198,7 +198,7 @@ const RegisterPage = () => {
               style={{ minHeight: "40px" }}
             >
               {loading ? (
-                <Spinner variant="primary" animation="border" />
+                <Spinner animation="border" style={{ color: "#67e8f9" }} />
               ) : error ? (
                 <div className="text-danger fw-semibold small d-flex align-items-center gap-2">
                   <FaCircleExclamation />
