@@ -46,26 +46,39 @@ const ArtistDetails = () => {
   }
 
   return (
-    <Container fluid className="artist-details-page">
-      <Row className="justify-content-center align-items-center min-vh-100">
-        <Col xs={11} md={9} lg={7} xl={5} className="text-center">
-          <img
-            src={artist.avatar}
-            alt={artist.artistName}
-            className="artist-details-avatar"
-          />
+    <Container fluid className="artist-details-page p-0">
+      <div
+        className="artist-background"
+        style={{
+          backgroundImage: `url(${artist.avatar})`,
+        }}
+      >
+        <div className="artist-overlay">
+          <Row className="justify-content-center align-items-center min-vh-100 m-0">
+            <Col xs={11} md={9} lg={7} xl={5} className="text-center">
+              <img
+                src={artist.avatar}
+                alt={artist.artistName}
+                className="artist-details-avatar"
+              />
 
-          <h1 className="artist-details-name">{artist.artistName}</h1>
+              <div className="artist-info-box">
+                <h1 className="artist-details-name">{artist.artistName}</h1>
 
-          <h4 className="artist-details-nationality">{artist.nationality}</h4>
+                <h4 className="artist-details-nationality">
+                  {artist.nationality}
+                </h4>
 
-          <p className="artist-details-info">
-            {artist.genre}
-            {" • "}
-            Born in {artist.dateOfBirth}
-          </p>
-        </Col>
-      </Row>
+                <p className="artist-details-info">
+                  {artist.genre}
+                  {" • "}
+                  Born in {artist.dateOfBirth}
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
     </Container>
   )
 }
