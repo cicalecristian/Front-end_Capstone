@@ -6,6 +6,7 @@ import RegisterPage from "./components/RegisterPage.jsx"
 import Home from "./components/Home.jsx"
 import SongDetails from "./components/SongDetails.jsx"
 import ArtistDetails from "./components/ArtistDetails.jsx"
+import EventDetails from "./components/EventDetails.jsx"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/songs/:id" element={<SongDetails />} />
         <Route path="/artists/:id" element={<ArtistDetails />} />
+        <Route path="/events/:id" element={<EventDetails />} />
       </Routes>
     </Provider>
   )
