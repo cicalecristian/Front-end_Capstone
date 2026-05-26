@@ -44,7 +44,7 @@ const TrendingSongs = ({ songs }) => {
         {songs.map((song) => (
           <SwiperSlide key={song.id}>
             <Link to={`/songs/${song.id}`} className="text-decoration-none">
-              <Card className="bg-transparent card-effect">
+              <Card className="card-effect">
                 <div>
                   <img
                     src={song.cover}

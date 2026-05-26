@@ -44,7 +44,7 @@ const TrendingEvents = ({ events }) => {
         {events.map((event) => (
           <SwiperSlide key={event.id}>
             <Link to={`/events/${event.id}`} className="text-decoration-none">
-              <Card className="bg-transparent card-effect">
+              <Card className="card-effect">
                 <div>
                   <img
                     src={event.cover}

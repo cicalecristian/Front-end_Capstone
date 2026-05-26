@@ -44,6 +44,8 @@
 .card-effect {
   transition: all 0.5s ease;
   background-color: #181818;
+  overflow: hidden;
+  border: 0;
 }
 
 .card-effect:hover {
@@ -76,10 +78,10 @@
 }
 
 .song-details-artist {
+  display: inline-block;
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   color: #28d9f0;
   font-weight: 600;
-  margin-bottom: 1.5rem;
 }
 
 .song-details-info {
@@ -244,14 +246,16 @@
   margin-bottom: 1rem;
 }
 
-.event-artist {
+.event-artist,
+.song-details-artist {
   display: inline-block;
   color: #67e8f9;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   transition: color 0.3s ease;
 }
 
-.event-artist:hover {
+.event-artist:hover,
+.song-details-artist:hover {
   color: white;
 }
 
