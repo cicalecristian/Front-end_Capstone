@@ -59,7 +59,7 @@ const SongDetails = () => {
             to={`/artists/${song.artists[0].artistId}`}
             className="text-decoration-none song-details-artist"
           >
-            <h4 className="song-details-artist">
+            <h4 className="song-details-artist d-inline-block">
               {song.artists[0].artistName}
             </h4>
           </Link>
