@@ -1,11 +1,13 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
+import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
+import { FaCircleExclamation, FaHeart, FaRegHeart } from "react-icons/fa6"
 import { getSingleSongAction } from "../redux/actions/songAction"
-import { Container, Row, Col } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { Spinner } from "react-bootstrap"
-import { FaCircleExclamation } from "react-icons/fa6"
+import {
+  addFavoriteAction,
+  removeFavoriteAction,
+} from "../redux/actions/favoriteAction"
 
 const SongDetails = () => {
   const dispatch = useDispatch()
@@ -14,8 +16,7 @@ const SongDetails = () => {
   const song = useSelector((state) => state.songs.singleSong)
   const error = useSelector((state) => state.songs.error)
   const loading = useSelector((state) => state.songs.loading)
-
-  console.log(song)
+  const favorites = useSelector((state) => state.favorites.favorites)
 
   useEffect(() => {
     dispatch(getSingleSongAction(id))
@@ -41,38 +42,64 @@ const SongDetails = () => {
     )
   }
 
-  if (!song) {
-    return null
-  }
+  if (!song) return null
+
+  const favoriteFound = favorites.find(
+    (favorite) => favorite.songId === song.id,
+  )
+
+  const isFavorite = !!favoriteFound
 
   return (
-    <Container fluid className=" background-app min-vh-100">
+    <Container fluid className="song-details-page">
       <Row className="justify-content-center align-items-center min-vh-100">
         <Col xs={11} md={9} lg={7} xl={5} className="text-center">
-          <img
-            src={song.cover}
-            alt={song.title}
-            className="song-details-cover"
-          />
-          <h1 className="song-details-title">{song.title}</h1>
-          <Link
-            to={`/artists/${song.artists[0].artistId}`}
-            className="text-decoration-none song-details-artist"
-          >
-            <h4 className="song-details-artist d-inline-block">
-              {song.artists[0].artistName}
-            </h4>
-          </Link>
-          <div className="song-details-info">
-            <ul className=" list-unstyled d-flex justify-content-center gap-2 small">
-              <li>{song.genre}</li>
-              {" • "}
-              <li>
-                {Math.floor(song.duration / 60)}m {song.duration % 60}s
-              </li>
-              {" • "}
-              <li>{song.releaseDate}</li>
-            </ul>
+          <div className="song-details-card">
+            <img
+              src={song.cover}
+              alt={song.title}
+              className="song-details-cover"
+            />
+
+            <h1 className="song-details-title">{song.title}</h1>
+
+            <Link
+              to={`/artists/${song.artists[0].artistId}`}
+              className="text-decoration-none"
+            >
+              <h4 className="song-details-artist">
+                {song.artists[0].artistName}
+              </h4>
+            </Link>
+
+            <div className="song-details-info">
+              <ul className="list-unstyled d-flex justify-content-center gap-2 small flex-wrap">
+                <li>{song.genre}</li>
+
+                {" • "}
+
+                <li>
+                  {Math.floor(song.duration / 60)}m {song.duration % 60}s
+                </li>
+
+                {" • "}
+
+                <li>{song.releaseDate}</li>
+              </ul>
+            </div>
+
+            <Button
+              className="favorite-btn"
+              onClick={() => {
+                if (isFavorite) {
+                  dispatch(removeFavoriteAction(favoriteFound.id))
+                } else {
+                  dispatch(addFavoriteAction(song.id))
+                }
+              }}
+            >
+              {isFavorite ? <FaHeart /> : <FaRegHeart />}
+            </Button>
           </div>
         </Col>
       </Row>
