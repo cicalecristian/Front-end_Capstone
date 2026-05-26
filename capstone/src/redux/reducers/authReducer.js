@@ -9,9 +9,11 @@ import {
   CLEAR_ERROR,
 } from "../actions/authAction"
 
+const token = localStorage.getItem("token")
+
 const initialState = {
-  token: localStorage.getItem("token") || null,
-  user: null,
+  token: token || null,
+  user: token ? JSON.parse(atob(token.split(".")[1])) : null,
   loading: false,
   error: false,
 }

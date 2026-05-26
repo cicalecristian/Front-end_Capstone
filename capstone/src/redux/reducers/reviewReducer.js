@@ -43,7 +43,7 @@ const reviewReducer = (state = initialState, action) => {
     case GET_AVERAGE_RATING:
       return {
         ...state,
-        averageRating: action.payload,
+        averageRating: Number(action.payload),
       }
 
     case ADD_REVIEW:

@@ -3,23 +3,36 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
 import { FaCircleExclamation, FaHeart, FaRegHeart } from "react-icons/fa6"
+import { Rating } from "react-simple-star-rating"
 import { getSingleSongAction } from "../redux/actions/songAction"
 import {
   addFavoriteAction,
   removeFavoriteAction,
 } from "../redux/actions/favoriteAction"
+import {
+  getReviewsAction,
+  getAverageRatingAction,
+  addReviewAction,
+  updateReviewAction,
+} from "../redux/actions/reviewAction"
 
 const SongDetails = () => {
   const dispatch = useDispatch()
 
   const { id } = useParams()
+
   const song = useSelector((state) => state.songs.singleSong)
   const error = useSelector((state) => state.songs.error)
   const loading = useSelector((state) => state.songs.loading)
   const favorites = useSelector((state) => state.favorites.favorites)
+  const reviews = useSelector((state) => state.reviews.reviews)
+  const averageRating = useSelector((state) => state.reviews.averageRating)
+  const currentUser = useSelector((state) => state.auth.user)
 
   useEffect(() => {
     dispatch(getSingleSongAction(id))
+    dispatch(getReviewsAction(id))
+    dispatch(getAverageRatingAction(id))
   }, [dispatch, id])
 
   if (loading) {
@@ -50,10 +63,14 @@ const SongDetails = () => {
 
   const isFavorite = !!favoriteFound
 
+  const alreadyReviewed = currentUser
+    ? reviews.find((review) => review.userId === currentUser.sub)
+    : null
+
   return (
     <Container fluid className="song-details-page">
       <Row className="justify-content-center align-items-center min-vh-100">
-        <Col xs={11} md={9} lg={7} xl={5} className="text-center">
+        <Col xs={11} md={9} lg={7} xl={5} className="text-center my-4">
           <div className="song-details-card">
             <img
               src={song.cover}
@@ -88,8 +105,42 @@ const SongDetails = () => {
               </ul>
             </div>
 
+            <div className="rating-wrapper">
+              <Rating
+                key={averageRating}
+                initialValue={averageRating}
+                readonly
+                allowFraction
+                size={28}
+                fillColor="#38bdf8"
+              />
+
+              <p className="average-rating-value">{averageRating.toFixed(1)}</p>
+            </div>
+
+            <div className="user-rating-wrapper">
+              <p className="rate-this-song">Rate this song</p>
+
+              <Rating
+                key={alreadyReviewed?.rating}
+                initialValue={alreadyReviewed ? alreadyReviewed.rating : 0}
+                size={32}
+                onClick={async (rate) => {
+                  if (!rate || rate <= 0) return
+
+                  if (alreadyReviewed) {
+                    await dispatch(
+                      updateReviewAction(song.id, Math.round(rate)),
+                    )
+                  } else {
+                    await dispatch(addReviewAction(song.id, Math.round(rate)))
+                  }
+                }}
+              />
+            </div>
+
             <Button
-              className="favorite-btn"
+              className="favorite-btn mt-4 mx-auto"
               onClick={() => {
                 if (isFavorite) {
                   dispatch(removeFavoriteAction(favoriteFound.id))

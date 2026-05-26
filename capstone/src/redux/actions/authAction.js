@@ -29,9 +29,12 @@ export const loginAction = (credentials) => {
       if (response.ok) {
         localStorage.setItem("token", data.accessToken)
 
+        const tokenPayload = JSON.parse(atob(data.accessToken.split(".")[1]))
+
         dispatch({
           type: LOGIN,
           payload: data.accessToken,
+          user: tokenPayload,
         })
 
         return true

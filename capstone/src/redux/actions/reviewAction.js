@@ -94,6 +94,9 @@ export const getAverageRatingAction = (songId) => {
 
 export const addReviewAction = (songId, rate) => {
   return async (dispatch) => {
+    if (!rate || rate <= 0) {
+      return
+    }
     try {
       const token = localStorage.getItem("token")
 
@@ -110,7 +113,7 @@ export const addReviewAction = (songId, rate) => {
         headers,
         body: JSON.stringify({
           songId,
-          rating: rate / 20,
+          rating: Math.round(rate),
         }),
       })
 
@@ -153,7 +156,7 @@ export const updateReviewAction = (songId, rate) => {
         method: "PATCH",
         headers,
         body: JSON.stringify({
-          rating: rate / 20,
+          rating: Math.round(rate),
         }),
       })
 
