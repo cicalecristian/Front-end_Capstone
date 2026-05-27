@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
@@ -14,7 +14,6 @@ import {
   getReviewsAction,
   getAverageRatingAction,
   addReviewAction,
-  updateReviewAction,
 } from "../../../redux/actions/reviewAction"
 import "./SongDetails.css"
 
@@ -30,6 +29,8 @@ const SongDetails = () => {
   const reviews = useSelector((state) => state.reviews.reviews)
   const averageRating = useSelector((state) => state.reviews.averageRating)
   const currentUser = useSelector((state) => state.auth.user)
+
+  const [isRating, setIsRating] = useState(false)
 
   useEffect(() => {
     dispatch(getSingleSongAction(id))
@@ -69,6 +70,10 @@ const SongDetails = () => {
   const alreadyReviewed = currentUser
     ? reviews.find((review) => review.userId === currentUser.sub)
     : null
+
+  console.log("alreadyReviewed:", alreadyReviewed)
+  console.log("reviews:", reviews)
+  console.log("currentUser:", currentUser)
 
   return (
     <Container fluid className="song-details-page">
@@ -129,15 +134,10 @@ const SongDetails = () => {
                 initialValue={alreadyReviewed ? alreadyReviewed.rating : 0}
                 size={32}
                 onClick={async (rate) => {
-                  if (!rate || rate <= 0) return
-
-                  if (alreadyReviewed) {
-                    await dispatch(
-                      updateReviewAction(song.id, Math.round(rate)),
-                    )
-                  } else {
-                    await dispatch(addReviewAction(song.id, Math.round(rate)))
-                  }
+                  if (!rate || rate <= 0 || isRating) return
+                  setIsRating(true)
+                  await dispatch(addReviewAction(song.id, Math.round(rate)))
+                  setIsRating(false)
                 }}
               />
             </div>

@@ -36,7 +36,6 @@ export const loginAction = (credentials) => {
           payload: data.accessToken,
           user: tokenPayload,
         })
-
         return true
       } else {
         throw new Error(data.message)
@@ -54,7 +53,6 @@ export const loginAction = (credentials) => {
         type: LOGIN_ERROR,
         payload: errorMessage,
       })
-
       return false
     }
   }
@@ -82,6 +80,7 @@ export const registerAction = (userData) => {
         dispatch({
           type: REGISTER,
         })
+        return true
       } else {
         throw new Error(data.message)
       }
@@ -96,6 +95,7 @@ export const registerAction = (userData) => {
         type: REGISTER_ERROR,
         payload: errorMessage,
       })
+      return false
     }
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
   loginAction,
@@ -36,10 +36,18 @@ const LoginPage = () => {
     }
   }
 
+  const token = localStorage.getItem("token")
+
+  useEffect(() => {
+    if (token) {
+      navigate("/home")
+    }
+  }, [])
+
   return (
     <Row className=" min-vh-100 align-items-center justify-content-center g-0">
       <Col xs={11} sm={9} md={7} lg={5}>
-        <div className=" bg-dark d-flex flex-column align-items-center rounded-4">
+        <div className=" input bg-dark d-flex flex-column align-items-center rounded-4">
           <h2 className=" text-white mt-5">LOGIN</h2>
           <p className=" text-secondary mb-5 mt-2 fw-semibold">
             please enter your email and password

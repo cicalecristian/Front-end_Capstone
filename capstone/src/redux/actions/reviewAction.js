@@ -119,6 +119,8 @@ export const addReviewAction = (songId, rate) => {
 
       const data = await response.json()
 
+      console.log("Risposta backend:", data)
+
       if (response.ok) {
         dispatch({
           type: ADD_REVIEW,
@@ -127,6 +129,11 @@ export const addReviewAction = (songId, rate) => {
 
         dispatch(getReviewsAction(songId))
         dispatch(getAverageRatingAction(songId))
+      } else if (
+        response.status === 400 &&
+        data.message === "You have already reviewed this song"
+      ) {
+        dispatch(updateReviewAction(songId, rate))
       } else {
         throw new Error(data.message)
       }
@@ -161,6 +168,8 @@ export const updateReviewAction = (songId, rate) => {
       })
 
       const data = await response.json()
+
+      console.log("update response:", data)
 
       if (response.ok) {
         dispatch({
