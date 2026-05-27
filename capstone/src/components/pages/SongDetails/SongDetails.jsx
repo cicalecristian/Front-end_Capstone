@@ -4,17 +4,19 @@ import { useParams, Link } from "react-router-dom"
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
 import { FaCircleExclamation, FaHeart, FaRegHeart } from "react-icons/fa6"
 import { Rating } from "react-simple-star-rating"
-import { getSingleSongAction } from "../redux/actions/songAction"
+import { getSingleSongAction } from "../../../redux/actions/songAction"
 import {
+  getFavoritesAction,
   addFavoriteAction,
   removeFavoriteAction,
-} from "../redux/actions/favoriteAction"
+} from "../../../redux/actions/favoriteAction"
 import {
   getReviewsAction,
   getAverageRatingAction,
   addReviewAction,
   updateReviewAction,
-} from "../redux/actions/reviewAction"
+} from "../../../redux/actions/reviewAction"
+import "./SongDetails.css"
 
 const SongDetails = () => {
   const dispatch = useDispatch()
@@ -33,6 +35,7 @@ const SongDetails = () => {
     dispatch(getSingleSongAction(id))
     dispatch(getReviewsAction(id))
     dispatch(getAverageRatingAction(id))
+    dispatch(getFavoritesAction())
   }, [dispatch, id])
 
   if (loading) {

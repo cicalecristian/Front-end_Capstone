@@ -1,10 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getSingleArtistAction } from "../redux/actions/artistAction"
+import { getSingleArtistAction } from "../../../redux/actions/artistAction"
 import { Container, Row, Col } from "react-bootstrap"
 import { Spinner } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
+import "./ArtistDetails.css"
 
 const ArtistDetails = () => {
   const dispatch = useDispatch()

@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
-import { clearErrorAction, registerAction } from "../redux/actions/authAction"
+import {
+  clearErrorAction,
+  registerAction,
+} from "../../redux/actions/authAction"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
 import { useState } from "react"
+import "./auth.css"
+import { FaEye, FaEyeSlash } from "react-icons/fa6"
 
 const RegisterPage = () => {
   const dispatch = useDispatch()
@@ -20,6 +25,8 @@ const RegisterPage = () => {
     dateOfBirth: "",
     avatar: "",
   })
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -133,23 +140,28 @@ const RegisterPage = () => {
 
               <br />
 
-              <input
-                className={`form-control bg-dark text-white custom-input py-2 ${
-                  error ? "border-danger" : ""
-                }`}
-                style={{ boxShadow: "none" }}
-                type="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={(e) => {
-                  dispatch(clearErrorAction())
-
-                  setFormData({
-                    ...formData,
-                    password: e.target.value,
-                  })
-                }}
-              />
+              <div className="position-relative">
+                <input
+                  className={`form-control bg-dark text-white custom-input py-2 ${
+                    error ? "border-danger" : ""
+                  }`}
+                  style={{ boxShadow: "none" }}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={(e) => {
+                    dispatch(clearErrorAction())
+                    setFormData({ ...formData, password: e.target.value })
+                  }}
+                />
+                <button
+                  type="button"
+                  className="position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent text-white pe-3"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
 
               <br />
 

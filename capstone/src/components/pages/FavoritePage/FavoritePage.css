@@ -1,0 +1,118 @@
+.favorites-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #08678c, #831ed6);
+}
+
+.favorites-title {
+  color: white;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.favorites-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+}
+
+.favorites-page .favorite-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.favorites-page .favorite-card:hover {
+  transform: translateY(-6px);
+}
+
+.favorites-page .favorite-card .card-body {
+  background: transparent;
+}
+
+.favorite-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.favorite-song-title {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.favorite-artists {
+  color: #67e8f9;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.favorite-genre {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.favorites-page .remove-favorite-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ff4d6d;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.favorites-page .remove-favorite-btn:hover {
+  background: #ff4d6d;
+  color: white;
+}
+
+.empty-favorites {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.empty-heart {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  color: #ff4d6d;
+}
+
+/* .favorite-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #ff4d6d;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+  line-height: 1;
+}
+
+.favorite-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.08);
+  background: #ff4d6d;
+  color: white;
+} */

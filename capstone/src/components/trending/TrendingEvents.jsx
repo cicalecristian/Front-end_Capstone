@@ -44,16 +44,12 @@ const TrendingEvents = ({ events }) => {
         {events.map((event) => (
           <SwiperSlide key={event.id}>
             <Link to={`/events/${event.id}`} className="text-decoration-none">
-              <Card className="card-effect">
+              <Card className="card-effect bg-transparent border-0">
                 <div>
-                  <img
-                    src={event.cover}
-                    alt={event.title}
-                    className="w-100 rounded-top"
-                  />
+                  <img src={event.cover} alt={event.title} className="w-100" />
                 </div>
 
-                <Card.Body className="p-2 bg-black rounded-bottom bg-gradient">
+                <Card.Body className="p-2 bg-black bg-gradient">
                   <Card.Title className="text-white text-center mb-3 mt-2 event-title text-truncate">
                     {event.title}
                   </Card.Title>

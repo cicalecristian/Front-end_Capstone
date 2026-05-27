@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 import { Link } from "react-router-dom"
+import "./Trending.css"
 
 const TrendingSongs = ({ songs }) => {
   if (!songs?.length) return null
@@ -44,16 +45,17 @@ const TrendingSongs = ({ songs }) => {
         {songs.map((song) => (
           <SwiperSlide key={song.id}>
             <Link to={`/songs/${song.id}`} className="text-decoration-none">
-              <Card className="card-effect">
+              <Card className="card-effect bg-transparent border-0">
                 <div>
                   <img
                     src={song.cover}
                     alt={song.title}
-                    className="w-100 rounded-top"
+                    className="w-100"
+                    style={{ display: "block" }}
                   />
                 </div>
 
-                <Card.Body className="p-2 bg-black rounded-bottom bg-gradient">
+                <Card.Body className="p-2 bg-black bg-gradient">
                   <Card.Title className="text-white text-center mb-3 mt-2 song-title text-truncate">
                     {song.title}
                   </Card.Title>

@@ -44,16 +44,16 @@ const TrendingArtists = ({ artists }) => {
         {artists.map((artist) => (
           <SwiperSlide key={artist.id}>
             <Link to={`/artists/${artist.id}`} className="text-decoration-none">
-              <Card className="card-effect">
+              <Card className="card-effect bg-transparent border-0">
                 <div>
                   <img
                     src={artist.avatar}
                     alt={artist.artistName}
-                    className="w-100 rounded-top"
+                    className="w-100"
                   />
                 </div>
 
-                <Card.Body className="p-2 bg-black rounded-bottom bg-gradient">
+                <Card.Body className="p-2 bg-black bg-gradient">
                   <Card.Title className="text-white text-center mb-3 mt-2 artist-artistName text-truncate">
                     {artist.artistName}
                   </Card.Title>

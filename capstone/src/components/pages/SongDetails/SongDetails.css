@@ -1,0 +1,118 @@
+.song-details-cover {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+}
+
+.song-details-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #f5f5f5;
+}
+
+.song-details-artist {
+  display: inline-block;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #28d9f0;
+  font-weight: 600;
+}
+
+.song-details-info {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+.song-details-page .favorite-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #ff4d6d;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+  line-height: 1;
+}
+
+.favorite-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.song-details-page .favorite-btn:hover {
+  transform: scale(1.08);
+  background: #ff4d6d;
+  color: white;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: fit-content;
+  margin: 24px auto 0;
+  padding: 12px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.average-rating-value {
+  margin: 0;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.user-rating-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 20px 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.rate-this-song {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.user-rating-wrapper svg {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.25));
+}
+
+.user-rating-wrapper svg:hover {
+  transform: scale(1.08);
+  opacity: 0.95;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+}

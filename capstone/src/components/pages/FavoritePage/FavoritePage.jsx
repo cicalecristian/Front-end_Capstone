@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   getFavoritesAction,
   removeFavoriteAction,
-} from "../redux/actions/favoriteAction"
+} from "../../../redux/actions/favoriteAction"
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { FaHeart, FaCircleExclamation } from "react-icons/fa6"
+import "./FavoritePage.css"
 
 const FavoritesPage = () => {
   const dispatch = useDispatch()

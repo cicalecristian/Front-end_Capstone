@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getSingleEventAction } from "../redux/actions/eventAction"
+import { getSingleEventAction } from "../../../redux/actions/eventAction"
 import { Container, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { Spinner } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
+import "./EventDetails.css"
 
 const EventDetails = () => {
   const dispatch = useDispatch()
