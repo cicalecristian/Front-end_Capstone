@@ -16,7 +16,7 @@ const store = configureStore({
     events: eventReducer,
     favorites: favoriteReducer,
     reviews: reviewReducer,
-    reservation: reservationReducer,
+    reservations: reservationReducer,
   },
 })
 

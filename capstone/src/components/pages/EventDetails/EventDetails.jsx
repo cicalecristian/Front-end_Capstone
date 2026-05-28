@@ -1,10 +1,13 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getSingleEventAction } from "../../../redux/actions/eventAction"
-import { Container, Row, Col } from "react-bootstrap"
+import {
+  createReservationAction,
+  clearReservationErrorAction,
+} from "../../../redux/actions/reservationAction"
+import { Container, Row, Col, Spinner, Form, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { Spinner } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
 import "./EventDetails.css"
 
@@ -16,9 +19,45 @@ const EventDetails = () => {
   const error = useSelector((state) => state.events.error)
   const loading = useSelector((state) => state.events.loading)
 
+  const reservationLoading = useSelector((state) => state.reservations.loading)
+  const reservationError = useSelector((state) => state.reservations.error)
+
+  const [tickets, setTickets] = useState(1)
+  const [bookingSuccess, setBookingSuccess] = useState(false)
+  const [showConfirmToast, setShowConfirmToast] = useState(false)
+  const [pendingTickets, setPendingTickets] = useState(1)
+
   useEffect(() => {
     dispatch(getSingleEventAction(id))
   }, [dispatch, id])
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearReservationErrorAction())
+    }
+  }, [dispatch])
+
+  const handleReservation = (e) => {
+    e.preventDefault()
+    setBookingSuccess(false)
+    setPendingTickets(tickets)
+    setShowConfirmToast(true)
+  }
+
+  const confirmReservation = async () => {
+    try {
+      const success = await dispatch(
+        createReservationAction({ eventId: id, tickets: pendingTickets }),
+      )
+
+      if (success) {
+        setBookingSuccess(true)
+        setTickets(1)
+      }
+    } finally {
+      setShowConfirmToast(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -46,6 +85,48 @@ const EventDetails = () => {
 
   return (
     <Container fluid className="event-page p-0 overflow-hidden">
+      {showConfirmToast && (
+        <div className="reservation-confirm-overlay">
+          <div className="reservation-confirm-toast">
+            <p className="event-label mb-2">CONFIRM RESERVATION</p>
+
+            <h4 className="reservation-confirm-title">
+              Confirm your reservation?
+            </h4>
+
+            <p className="reservation-confirm-text">
+              You are reserving {pendingTickets}{" "}
+              {pendingTickets === 1 ? "ticket" : "tickets"} for {event.title}.
+            </p>
+
+            <div className="reservation-confirm-actions">
+              <Button
+                type="button"
+                variant="custom"
+                className="reservation-confirm-btn confirm-no"
+                onClick={() => setShowConfirmToast(false)}
+                disabled={reservationLoading}
+              >
+                NO
+              </Button>
+
+              <Button
+                type="button"
+                variant="custom"
+                className="reservation-confirm-btn confirm-yes"
+                onClick={confirmReservation}
+                disabled={reservationLoading}
+              >
+                {reservationLoading ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  "YES"
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       <Row className="justify-content-center align-items-center min-vh-100 px-3">
         <Col xs={12} lg={10} xl={9}>
           <div className="event-card-wrapper">
@@ -74,7 +155,6 @@ const EventDetails = () => {
                   <div className="event-meta">
                     <div>
                       <span className="event-label">CITY</span>
-
                       <p>
                         {event.city}, {event.country}
                       </p>
@@ -82,15 +162,78 @@ const EventDetails = () => {
 
                     <div>
                       <span className="event-label">DATE</span>
-
                       <p>{event.date}</p>
                     </div>
 
                     <div>
                       <span className="event-label">SEATS</span>
-
                       <p>{event.seat}</p>
                     </div>
+                  </div>
+
+                  <div className="reservation-form-wrapper">
+                    <p className="event-label mb-3">BOOK TICKETS</p>
+
+                    <Form
+                      onSubmit={handleReservation}
+                      className="reservation-form"
+                    >
+                      {bookingSuccess && (
+                        <div className="reservation-success">
+                          <span>Booking confirmed!</span>
+                        </div>
+                      )}
+
+                      <div className="tickets-control">
+                        <Button
+                          type="button"
+                          variant="custom"
+                          className="tickets-btn"
+                          onClick={() => setTickets((t) => Math.max(1, t - 1))}
+                          disabled={tickets <= 1}
+                        >
+                          −
+                        </Button>
+
+                        <span className="tickets-count">{tickets}</span>
+
+                        <Button
+                          type="button"
+                          variant="custom"
+                          className="tickets-btn"
+                          onClick={() =>
+                            setTickets((t) =>
+                              Math.min(Math.min(event.seat, 4), t + 1),
+                            )
+                          }
+                          disabled={tickets >= Math.min(event.seat, 4)}
+                        >
+                          +
+                        </Button>
+                      </div>
+
+                      {reservationError && (
+                        <div className="reservation-error">
+                          <FaCircleExclamation />
+                          <span>{reservationError}</span>
+                        </div>
+                      )}
+
+                      <Button
+                        type="submit"
+                        variant="custom"
+                        className="reservation-submit"
+                        disabled={reservationLoading || event.seat === 0}
+                      >
+                        {reservationLoading ? (
+                          <Spinner animation="border" size="sm" />
+                        ) : event.seat === 0 ? (
+                          "SOLD OUT"
+                        ) : (
+                          "RESERVE NOW"
+                        )}
+                      </Button>
+                    </Form>
                   </div>
                 </div>
               </Col>
