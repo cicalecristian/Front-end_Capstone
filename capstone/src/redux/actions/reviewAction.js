@@ -119,8 +119,6 @@ export const addReviewAction = (songId, rate) => {
 
       const data = await response.json()
 
-      console.log("Risposta backend:", data)
-
       if (response.ok) {
         dispatch({
           type: ADD_REVIEW,
@@ -168,8 +166,6 @@ export const updateReviewAction = (songId, rate) => {
       })
 
       const data = await response.json()
-
-      console.log("update response:", data)
 
       if (response.ok) {
         dispatch({

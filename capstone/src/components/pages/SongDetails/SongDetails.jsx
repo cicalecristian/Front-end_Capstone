@@ -73,10 +73,6 @@ const SongDetails = () => {
     ? reviews.find((review) => review.userId === currentUser.sub)
     : null
 
-  console.log("alreadyReviewed:", alreadyReviewed)
-  console.log("reviews:", reviews)
-  console.log("currentUser:", currentUser)
-
   return (
     <Container fluid className="song-details-page">
       <Row className="justify-content-center align-items-center min-vh-100">

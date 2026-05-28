@@ -47,8 +47,6 @@ export const loginAction = (credentials) => {
         errorMessage = "Unable to connect to the server"
       }
 
-      console.log(error)
-
       dispatch({
         type: LOGIN_ERROR,
         payload: errorMessage,

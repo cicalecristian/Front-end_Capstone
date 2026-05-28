@@ -16,8 +16,6 @@ const EventDetails = () => {
   const error = useSelector((state) => state.events.error)
   const loading = useSelector((state) => state.events.loading)
 
-  console.log(event)
-
   useEffect(() => {
     dispatch(getSingleEventAction(id))
   }, [dispatch, id])

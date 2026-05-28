@@ -15,9 +15,6 @@ const ArtistDetails = () => {
   const error = useSelector((state) => state.artists.error)
   const loading = useSelector((state) => state.artists.loading)
 
-  console.log(artist)
-  console.log("ID from params:", id)
-
   useEffect(() => {
     dispatch(getSingleArtistAction(id))
   }, [dispatch, id])
