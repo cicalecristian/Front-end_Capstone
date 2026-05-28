@@ -30,7 +30,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        reviews: [],
+        reviews: action.payload,
       }
 
     case GET_REVIEWS_ERROR:

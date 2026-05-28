@@ -127,8 +127,8 @@ export const addReviewAction = (songId, rate) => {
           payload: data,
         })
 
-        dispatch(getReviewsAction(songId))
-        dispatch(getAverageRatingAction(songId))
+        await dispatch(getReviewsAction(songId))
+        await dispatch(getAverageRatingAction(songId))
       } else if (
         response.status === 400 &&
         data.message === "You have already reviewed this song"

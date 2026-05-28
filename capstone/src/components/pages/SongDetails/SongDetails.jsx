@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
@@ -14,6 +14,7 @@ import {
   getReviewsAction,
   getAverageRatingAction,
   addReviewAction,
+  updateReviewAction,
 } from "../../../redux/actions/reviewAction"
 import "./SongDetails.css"
 
@@ -31,6 +32,7 @@ const SongDetails = () => {
   const currentUser = useSelector((state) => state.auth.user)
 
   const [isRating, setIsRating] = useState(false)
+  const isRatingRef = useRef(false)
 
   useEffect(() => {
     dispatch(getSingleSongAction(id))
@@ -133,10 +135,21 @@ const SongDetails = () => {
                 key={alreadyReviewed?.rating}
                 initialValue={alreadyReviewed ? alreadyReviewed.rating : 0}
                 size={32}
+                readonly={isRating}
                 onClick={async (rate) => {
-                  if (!rate || rate <= 0 || isRating) return
+                  if (!rate || rate <= 0 || isRatingRef.current) return
+                  isRatingRef.current = true
                   setIsRating(true)
-                  await dispatch(addReviewAction(song.id, Math.round(rate)))
+
+                  if (alreadyReviewed) {
+                    await dispatch(
+                      updateReviewAction(song.id, Math.round(rate)),
+                    )
+                  } else {
+                    await dispatch(addReviewAction(song.id, Math.round(rate)))
+                  }
+
+                  isRatingRef.current = false
                   setIsRating(false)
                 }}
               />
