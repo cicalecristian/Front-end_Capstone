@@ -163,7 +163,7 @@ const EventDetails = () => {
 
                     <div>
                       <span className="event-label">DATE</span>
-                      <p>{event.date}</p>
+                      <p>{event.date?.split("-").reverse().join("-")}</p>
                     </div>
 
                     <div>

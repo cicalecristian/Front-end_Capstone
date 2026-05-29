@@ -6,7 +6,7 @@ export const GET_SINGLE_EVENT = "GET_SINGLE_EVENT"
 export const GET_SINGLE_EVENT_LOADING = "GET_SINGLE_EVENT_LOADING"
 export const GET_SINGLE_EVENT_ERROR = "GET_SINGLE_EVENT_ERROR"
 
-export const getEventsAction = () => {
+export const getEventsAction = (size = 10) => {
   return async (dispatch) => {
     dispatch({
       type: GET_EVENTS_LOADING,
@@ -21,9 +21,12 @@ export const getEventsAction = () => {
         headers.Authorization = `Bearer ${token}`
       }
 
-      const response = await fetch("http://localhost:3001/events", {
-        headers,
-      })
+      const response = await fetch(
+        `http://localhost:3001/events?size=${size}`,
+        {
+          headers,
+        },
+      )
 
       const data = await response.json()
 

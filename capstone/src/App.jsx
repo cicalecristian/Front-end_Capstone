@@ -9,6 +9,7 @@ import ArtistDetails from "./components/pages/ArtistDetails/ArtistDetails.jsx"
 import EventDetails from "./components/pages/EventDetails/EventDetails.jsx"
 import FavoritesPage from "./components/pages/FavoritePage/FavoritePage.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
+import SearchPage from "./components/pages/SearchPage/SearchPage.jsx"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/artists/:id" element={<ArtistDetails />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
       </Routes>
     </Provider>

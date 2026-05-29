@@ -8,6 +8,7 @@ import { getArtistsAction } from "../../redux/actions/artistAction"
 import { getEventsAction } from "../../redux/actions/eventAction"
 import { Spinner, Container } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
+import Navbar from "../layout/navbar/Navbar"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -53,6 +54,7 @@ const Home = () => {
 
   return (
     <Container fluid className=" g-0">
+      <Navbar />
       <TrendingSongs songs={songs} />
       <TrendingArtists artists={artists} />
       <TrendingEvents events={events} />

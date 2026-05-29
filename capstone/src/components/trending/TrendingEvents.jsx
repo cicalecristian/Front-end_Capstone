@@ -59,7 +59,7 @@ const TrendingEvents = ({ events }) => {
                   </Card.Text>
 
                   <Card.Text className="text-white text-center event-date mb-2 font-monospace">
-                    {event.date}
+                    {event.date?.split("-").reverse().join("-")}
                   </Card.Text>
                 </Card.Body>
               </Card>

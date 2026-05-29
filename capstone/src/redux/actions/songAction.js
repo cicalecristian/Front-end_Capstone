@@ -6,7 +6,7 @@ export const GET_SINGLE_SONG = "GET_SINGLE_SONG"
 export const GET_SINGLE_SONG_LOADING = "GET_SINGLE_SONG_LOADING"
 export const GET_SINGLE_SONG_ERROR = "GET_SINGLE_SONG_ERROR"
 
-export const getSongsAction = () => {
+export const getSongsAction = (size = 30) => {
   return async (dispatch) => {
     dispatch({
       type: GET_SONGS_LOADING,
@@ -21,7 +21,7 @@ export const getSongsAction = () => {
         headers.Authorization = `Bearer ${token}`
       }
 
-      const response = await fetch("http://localhost:3001/songs", {
+      const response = await fetch(`http://localhost:3001/songs?size=${size}`, {
         headers,
       })
 
