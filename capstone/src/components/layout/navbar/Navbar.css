@@ -256,7 +256,7 @@ body,
 }
 
 .jm.jm-search__tabs--mobile {
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .jm.jm-mobile__links {

@@ -1,0 +1,89 @@
+.jm-footer {
+  width: 100%;
+  margin-top: 56px;
+  padding: 24px 0;
+  background: rgba(12, 12, 16, 0.94);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+
+.jm-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.jm-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.jm-footer__brand > span {
+  color: #ff3d81;
+  font-size: 26px;
+}
+
+.jm-footer__brand p {
+  margin: 0;
+  font-weight: 800;
+}
+
+.jm-footer__brand small {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+}
+
+.jm-footer__info {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.jm-footer a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.jm-footer a:hover {
+  color: #fff;
+}
+
+.jm-footer__socials {
+  display: flex;
+  gap: 10px;
+}
+
+.jm-footer__socials a {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.jm-footer__copy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .jm-footer__inner,
+  .jm-footer__info {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.jm-footer__socials svg {
+  width: 17px;
+  height: 17px;
+}

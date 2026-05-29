@@ -9,6 +9,7 @@ import { getEventsAction } from "../../redux/actions/eventAction"
 import { Spinner, Container } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
 import Navbar from "../layout/navbar/Navbar"
+import Footer from "../layout/footer/Footer"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -58,6 +59,7 @@ const Home = () => {
       <TrendingSongs songs={songs} />
       <TrendingArtists artists={artists} />
       <TrendingEvents events={events} />
+      <Footer />
     </Container>
   )
 }
