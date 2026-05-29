@@ -51,6 +51,7 @@ const EventDetails = () => {
       )
 
       if (success) {
+        await dispatch(getSingleEventAction(id))
         setBookingSuccess(true)
         setTickets(1)
       }
