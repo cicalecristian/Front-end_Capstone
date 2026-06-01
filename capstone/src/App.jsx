@@ -14,6 +14,7 @@ import ProfilePage from "./components/pages/ProfilePage/ProfilePage.jsx"
 import EditProfile from "./components/pages/ProfilePage/editProfile/editProfile.jsx"
 import AdminUsers from "./components/pages/ProfilePage/AdminUsers/AdminUsers.jsx"
 import AdminReservations from "./components/pages/ProfilePage/AdminReservations/AdminReservations.jsx"
+import CreateEvent from "./components/pages/ProfilePage/CreateEvent/CreateEvent.jsx"
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/reservations" element={<AdminReservations />} />
+          <Route path="/admin/content" element={<CreateEvent />} />
         </Route>
       </Routes>
     </Provider>

@@ -6,6 +6,9 @@ import {
   GET_SINGLE_EVENT,
   GET_SINGLE_EVENT_LOADING,
   GET_SINGLE_EVENT_ERROR,
+  CREATE_EVENT,
+  CREATE_EVENT_LOADING,
+  CREATE_EVENT_ERROR,
 } from "../actions/eventAction"
 
 const initialState = {
@@ -59,6 +62,28 @@ const eventReducer = (state = initialState, action) => {
       }
 
     case GET_SINGLE_EVENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case CREATE_EVENT_LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      }
+
+    case CREATE_EVENT:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        events: [action.payload, ...state.events],
+      }
+
+    case CREATE_EVENT_ERROR:
       return {
         ...state,
         loading: false,
