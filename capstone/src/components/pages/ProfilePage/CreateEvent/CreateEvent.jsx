@@ -3,21 +3,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { Form, Spinner } from "react-bootstrap"
 import { FaCircleExclamation } from "react-icons/fa6"
 import {
+  getEventsAction,
   createEventAction,
+  updateEventAction,
+  deleteEventAction,
   clearEventErrorAction,
 } from "../../../../redux/actions/eventAction"
 import "./CreateEvent.css"
-
-const getTomorrowDate = () => {
-  const tomorrow = new Date()
-  tomorrow.setDate(tomorrow.getDate() + 1)
-
-  const year = tomorrow.getFullYear()
-  const month = String(tomorrow.getMonth() + 1).padStart(2, "0")
-  const day = String(tomorrow.getDate()).padStart(2, "0")
-
-  return `${year}-${month}-${day}`
-}
 
 const initialFormData = {
   title: "",
@@ -29,16 +21,37 @@ const initialFormData = {
   cover: "",
 }
 
+const getTomorrowDate = () => {
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  return tomorrow.toISOString().split("T")[0]
+}
+
+const getEventFormData = (event) => ({
+  title: event.title ?? "",
+  city: event.city ?? "",
+  country: event.country ?? "",
+  date: event.date ?? "",
+  seat: event.seat ?? "",
+  artistId: event.artistId ?? event.artist?.id ?? "",
+  cover: event.cover ?? "",
+})
+
 const CreateEvent = () => {
   const dispatch = useDispatch()
 
-  const { loading, error } = useSelector((state) => state.events)
+  const { events, loading, error } = useSelector((state) => state.events)
 
   const [formData, setFormData] = useState(initialFormData)
-  const [showConfirmToast, setShowConfirmToast] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState(null)
+  const [eventToDelete, setEventToDelete] = useState(null)
+  const [confirmAction, setConfirmAction] = useState(null)
   const [successMessage, setSuccessMessage] = useState("")
 
   useEffect(() => {
+    dispatch(getEventsAction(50))
+
     return () => {
       dispatch(clearEventErrorAction())
     }
@@ -48,39 +61,114 @@ const CreateEvent = () => {
     const { name, value } = e.target
 
     setSuccessMessage("")
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setShowConfirmToast(true)
+  const handleSeatStep = (amount) => {
+    setSuccessMessage("")
+
+    setFormData((prev) => {
+      const currentValue = Number(prev.seat) || 0
+      const nextValue = Math.min(Math.max(currentValue + amount, 100), 200000)
+
+      return {
+        ...prev,
+        seat: nextValue,
+      }
+    })
   }
 
-  const handleConfirmCreate = async () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setConfirmAction(selectedEvent ? "update" : "create")
+  }
+
+  const handleEdit = (event) => {
+    setSelectedEvent(event)
+    setSuccessMessage("")
+    setFormData(getEventFormData(event))
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const handleReset = () => {
+    setFormData(initialFormData)
+    setSelectedEvent(null)
+    setSuccessMessage("")
+  }
+
+  const handleAskDelete = (event) => {
+    setEventToDelete(event)
+    setConfirmAction("delete")
+  }
+
+  const handleConfirmSave = async () => {
     const eventData = {
       ...formData,
       seat: Number(formData.seat),
       cover: formData.cover.trim() || null,
     }
 
-    const ok = await dispatch(createEventAction(eventData))
+    const isUpdate = Boolean(selectedEvent)
+
+    const ok = isUpdate
+      ? await dispatch(updateEventAction(selectedEvent.id, eventData))
+      : await dispatch(createEventAction(eventData))
 
     if (ok) {
       setFormData(initialFormData)
-      setSuccessMessage("Evento creato con successo.")
-      setShowConfirmToast(false)
+      setSelectedEvent(null)
+      setConfirmAction(null)
+      setSuccessMessage(
+        isUpdate
+          ? "Evento aggiornato con successo."
+          : "Evento creato con successo.",
+      )
     }
   }
 
-  if (loading) {
+  const handleConfirmDelete = async () => {
+    if (!eventToDelete) return
+
+    const ok = await dispatch(deleteEventAction(eventToDelete.id))
+
+    if (ok) {
+      if (selectedEvent?.id === eventToDelete.id) {
+        setSelectedEvent(null)
+        setFormData(initialFormData)
+      }
+
+      setEventToDelete(null)
+      setConfirmAction(null)
+      setSuccessMessage("Evento eliminato con successo.")
+    }
+  }
+
+  const closeConfirmToast = () => {
+    setConfirmAction(null)
+    setEventToDelete(null)
+  }
+
+  const eventList = Array.isArray(events) ? events : []
+
+  if (loading && eventList.length === 0) {
     return (
       <div className="loading-container">
         <Spinner animation="border" className="custom-spinner" />
-        <p className="loading-text">Creazione evento...</p>
+        <p className="loading-text">Just Loading...</p>
+      </div>
+    )
+  }
+
+  if (error && eventList.length === 0) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5 bg-info p-3 rounded-3 error-box">
+          <FaCircleExclamation />
+          {error}
+        </div>
       </div>
     )
   }
@@ -88,10 +176,10 @@ const CreateEvent = () => {
   return (
     <div className="create-event">
       <h1 className="create-event__heading">
-        Crea <span>evento</span>
+        {selectedEvent ? "Modifica" : "Crea"} <span>evento</span>
       </h1>
 
-      <p className="create-event__meta">ADMIN · NUOVO EVENTO</p>
+      <p className="create-event__meta">ADMIN · EVENTI</p>
 
       {error && (
         <div className="create-event__error">
@@ -112,7 +200,6 @@ const CreateEvent = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Titolo evento"
               minLength={3}
               maxLength={50}
               required
@@ -127,7 +214,6 @@ const CreateEvent = () => {
               name="city"
               value={formData.city}
               onChange={handleChange}
-              placeholder="Città"
               minLength={2}
               maxLength={50}
               required
@@ -142,7 +228,6 @@ const CreateEvent = () => {
               name="country"
               value={formData.country}
               onChange={handleChange}
-              placeholder="Paese"
               minLength={2}
               maxLength={50}
               required
@@ -172,7 +257,6 @@ const CreateEvent = () => {
                 name="seat"
                 value={formData.seat}
                 onChange={handleChange}
-                placeholder="Minimo 100"
                 min={100}
                 max={200000}
                 required
@@ -182,12 +266,7 @@ const CreateEvent = () => {
                 <button
                   type="button"
                   className="create-event__number-btn"
-                  onClick={() =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      seat: Math.min(Number(prev.seat || 100) + 100, 200000),
-                    }))
-                  }
+                  onClick={() => handleSeatStep(100)}
                 >
                   +
                 </button>
@@ -195,12 +274,7 @@ const CreateEvent = () => {
                 <button
                   type="button"
                   className="create-event__number-btn"
-                  onClick={() =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      seat: Math.max(Number(prev.seat || 100) - 100, 100),
-                    }))
-                  }
+                  onClick={() => handleSeatStep(-100)}
                 >
                   −
                 </button>
@@ -216,7 +290,6 @@ const CreateEvent = () => {
               name="artistId"
               value={formData.artistId}
               onChange={handleChange}
-              placeholder="UUID artista"
               required
             />
           </div>
@@ -240,13 +313,14 @@ const CreateEvent = () => {
             className="profile-btn profile-btn--edit"
             disabled={loading}
           >
-            💾 Crea evento
+            {selectedEvent ? "💾 Salva modifiche" : "💾 Crea evento"}
           </button>
 
           <button
             type="button"
             className="profile-btn profile-btn--ghost"
-            onClick={() => setFormData(initialFormData)}
+            onClick={handleReset}
+            disabled={loading}
           >
             ✕ Reset
           </button>
@@ -257,34 +331,105 @@ const CreateEvent = () => {
         )}
       </Form>
 
-      {showConfirmToast && (
+      <p className="create-event__section-label create-event__list-title">
+        Eventi esistenti
+      </p>
+
+      {eventList.length === 0 ? (
+        <p className="create-event__empty">Nessun evento trovato.</p>
+      ) : (
+        <div className="create-event__list">
+          {eventList.map((event) => (
+            <div className="create-event__card" key={event.id}>
+              <div className="create-event__card-left">
+                <div className="create-event__icon">🎵</div>
+
+                <div className="create-event__info">
+                  <p className="create-event__name">{event.title}</p>
+                  <p className="create-event__sub">
+                    {event.city}, {event.country} · {event.date}
+                  </p>
+                  <span className="create-event__badge">
+                    {event.seat} posti
+                  </span>
+                </div>
+              </div>
+
+              <div className="create-event__card-actions">
+                <button
+                  type="button"
+                  className="profile-btn profile-btn--ghost"
+                  onClick={() => handleEdit(event)}
+                  disabled={loading}
+                >
+                  ✏️ Modifica
+                </button>
+
+                <button
+                  type="button"
+                  className="profile-btn profile-btn--danger"
+                  onClick={() => handleAskDelete(event)}
+                  disabled={loading}
+                >
+                  🗑️ Elimina
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {confirmAction && (
         <div className="confirm-overlay">
           <div className="confirm-toast">
-            <p className="confirm-toast__label">CONFERMA CREAZIONE</p>
+            <p className="confirm-toast__label">CONFERMA</p>
 
-            <h4 className="confirm-toast__title">Creare questo evento?</h4>
+            <h4 className="confirm-toast__title">
+              {confirmAction === "delete"
+                ? "Eliminare evento?"
+                : selectedEvent
+                  ? "Salvare modifiche?"
+                  : "Creare evento?"}
+            </h4>
 
             <p className="confirm-toast__text">
-              Stai per creare <strong>{formData.title}</strong> a{" "}
-              <strong>{formData.city}</strong>. Controlla i dati prima di
-              confermare.
+              {confirmAction === "delete" ? (
+                <>
+                  Stai per eliminare <strong>{eventToDelete?.title}</strong>.
+                  Questa azione è irreversibile.
+                </>
+              ) : (
+                <>
+                  Stai per {selectedEvent ? "modificare" : "creare"}{" "}
+                  <strong>{formData.title}</strong> a{" "}
+                  <strong>{formData.city}</strong>.
+                </>
+              )}
             </p>
 
             <div className="confirm-toast__actions">
               <button
                 className="profile-btn profile-btn--ghost"
-                onClick={() => setShowConfirmToast(false)}
+                onClick={closeConfirmToast}
                 disabled={loading}
               >
                 Annulla
               </button>
 
               <button
-                className="profile-btn profile-btn--edit"
-                onClick={handleConfirmCreate}
+                className={
+                  confirmAction === "delete"
+                    ? "profile-btn profile-btn--danger"
+                    : "profile-btn profile-btn--edit"
+                }
+                onClick={
+                  confirmAction === "delete"
+                    ? handleConfirmDelete
+                    : handleConfirmSave
+                }
                 disabled={loading}
               >
-                Conferma
+                {loading ? "Attendi..." : "Conferma"}
               </button>
             </div>
           </div>

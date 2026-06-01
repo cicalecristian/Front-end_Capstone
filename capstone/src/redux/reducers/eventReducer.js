@@ -9,6 +9,12 @@ import {
   CREATE_EVENT,
   CREATE_EVENT_LOADING,
   CREATE_EVENT_ERROR,
+  UPDATE_EVENT,
+  UPDATE_EVENT_LOADING,
+  UPDATE_EVENT_ERROR,
+  DELETE_EVENT,
+  DELETE_EVENT_LOADING,
+  DELETE_EVENT_ERROR,
 } from "../actions/eventAction"
 
 const initialState = {
@@ -84,6 +90,46 @@ const eventReducer = (state = initialState, action) => {
       }
 
     case CREATE_EVENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case UPDATE_EVENT_LOADING:
+    case DELETE_EVENT_LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      }
+
+    case UPDATE_EVENT:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        events: state.events.map((event) =>
+          event.id === action.payload.id ? action.payload : event,
+        ),
+        singleEvent:
+          state.singleEvent?.id === action.payload.id
+            ? action.payload
+            : state.singleEvent,
+      }
+
+    case DELETE_EVENT:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        events: state.events.filter((event) => event.id !== action.payload),
+        singleEvent:
+          state.singleEvent?.id === action.payload ? null : state.singleEvent,
+      }
+
+    case UPDATE_EVENT_ERROR:
+    case DELETE_EVENT_ERROR:
       return {
         ...state,
         loading: false,
