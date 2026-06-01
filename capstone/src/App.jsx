@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx"
 import SearchPage from "./components/pages/SearchPage/SearchPage.jsx"
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage.jsx"
 import EditProfile from "./components/pages/ProfilePage/editProfile/editProfile.jsx"
+import AdminUsers from "./components/pages/ProfilePage/AdminUsers/AdminUsers.jsx"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
         </Route>
       </Routes>
     </Provider>

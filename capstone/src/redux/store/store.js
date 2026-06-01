@@ -8,6 +8,7 @@ import favoriteReducer from "../reducers/favoriteReducer"
 import reviewReducer from "../reducers/reviewReducer"
 import reservationReducer from "../reducers/reservationReducer"
 import profileReducer from "../reducers/profileReducer"
+import userReducer from "../reducers/userReducer"
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     reviews: reviewReducer,
     reservations: reservationReducer,
     profile: profileReducer,
+    users: userReducer,
   },
 })
 

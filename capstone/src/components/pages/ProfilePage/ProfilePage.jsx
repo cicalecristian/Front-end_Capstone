@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
@@ -6,13 +6,15 @@ import {
   deleteProfileAction,
 } from "../../../redux/actions/profileAction"
 import { logoutAction } from "../../../redux/actions/authAction"
+import { Spinner } from "react-bootstrap"
+import { FaCircleExclamation } from "react-icons/fa6"
 import "./ProfilePage.css"
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { profile, loading } = useSelector((state) => state.profile)
-  console.log(profile)
+  const { profile, loading, error } = useSelector((state) => state.profile)
+  const [showDeleteToast, setShowDeleteToast] = useState(false)
 
   const isAdmin = profile?.role === "ROLE_ADMIN"
 
@@ -20,22 +22,47 @@ const ProfilePage = () => {
     dispatch(getProfileAction())
   }, [dispatch])
 
-  const handleDelete = async () => {
-    if (!window.confirm("Sei sicuro di voler eliminare il tuo account?")) return
+  const handleConfirmDelete = async () => {
     const ok = await dispatch(deleteProfileAction())
     if (ok) {
       dispatch(logoutAction())
-      navigate("/login")
+      navigate("/")
     }
   }
 
   const handleLogout = () => {
     dispatch(logoutAction())
-    navigate("/login")
+    navigate("/")
   }
 
-  if (loading || !profile)
-    return <p className="profile-page__empty">Caricamento...</p>
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <Spinner animation="border" className="custom-spinner" />
+        <p className="loading-text">Just Loading...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className="text-danger fw-semibold d-flex align-items-center gap-2 fs-5 bg-info p-3 rounded-3 error-box">
+          <FaCircleExclamation />
+          {error}
+        </div>
+      </div>
+    )
+  }
+
+  if (!profile) {
+    return (
+      <div className="loading-container">
+        <Spinner animation="border" className="custom-spinner" />
+        <p className="loading-text">Caricamento profilo...</p>
+      </div>
+    )
+  }
 
   const initials =
     `${profile.name?.[0] ?? ""}${profile.surname?.[0] ?? ""}`.toUpperCase()
@@ -169,11 +196,39 @@ const ProfilePage = () => {
         </button>
         <button
           className="profile-btn profile-btn--danger"
-          onClick={handleDelete}
+          onClick={() => setShowDeleteToast(true)}
         >
           🗑️ Elimina account
         </button>
       </div>
+
+      {showDeleteToast && (
+        <div className="confirm-overlay">
+          <div className="confirm-toast">
+            <p className="confirm-toast__label">CONFERMA ELIMINAZIONE</p>
+            <h4 className="confirm-toast__title">Sei sicuro?</h4>
+            <p className="confirm-toast__text">
+              Stai per eliminare il tuo account. Questa azione è irreversibile.
+            </p>
+            <div className="confirm-toast__actions">
+              <button
+                className="profile-btn profile-btn--ghost"
+                onClick={() => setShowDeleteToast(false)}
+                disabled={loading}
+              >
+                Annulla
+              </button>
+              <button
+                className="profile-btn profile-btn--danger"
+                onClick={handleConfirmDelete}
+                disabled={loading}
+              >
+                {loading ? "Eliminazione..." : "Elimina"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

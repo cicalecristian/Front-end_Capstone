@@ -190,3 +190,65 @@
 .profile-btn--danger:hover {
   background: rgba(220, 60, 60, 0.08);
 }
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.confirm-toast {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 28px 32px;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.confirm-toast__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e05555;
+  margin: 0;
+}
+
+.confirm-toast__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0;
+}
+
+.confirm-toast__text {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.confirm-toast__text strong {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.confirm-toast__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.confirm-toast__actions .profile-btn {
+  flex: 1;
+  justify-content: center;
+}
