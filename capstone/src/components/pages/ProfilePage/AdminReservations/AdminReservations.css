@@ -1,0 +1,149 @@
+.admin-reservations {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  min-height: 100vh;
+}
+
+.admin-reservations__heading {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #f5f5f5;
+  margin-bottom: 0.4rem;
+}
+
+.admin-reservations__heading span {
+  color: #28d9f0;
+}
+
+.admin-reservations__meta {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.admin-reservations__empty {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.admin-reservations__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-reservations__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.admin-reservations__card:hover {
+  background: rgba(40, 217, 240, 0.06);
+  border-color: rgba(40, 217, 240, 0.25);
+}
+
+.admin-reservations__card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.admin-reservations__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(40, 217, 240, 0.1);
+  border: 2px solid rgba(40, 217, 240, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.admin-reservations__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.admin-reservations__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-reservations__sub {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-reservations__details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-reservations__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(40, 217, 240, 0.12);
+  color: #28d9f0;
+  border: 1px solid rgba(40, 217, 240, 0.3);
+}
+
+.admin-reservations__date {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.admin-reservations__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 650px) {
+  .admin-reservations__card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-reservations__actions {
+    width: 100%;
+  }
+
+  .admin-reservations__actions .profile-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -13,6 +13,7 @@ import SearchPage from "./components/pages/SearchPage/SearchPage.jsx"
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage.jsx"
 import EditProfile from "./components/pages/ProfilePage/editProfile/editProfile.jsx"
 import AdminUsers from "./components/pages/ProfilePage/AdminUsers/AdminUsers.jsx"
+import AdminReservations from "./components/pages/ProfilePage/AdminReservations/AdminReservations.jsx"
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/reservations" element={<AdminReservations />} />
         </Route>
       </Routes>
     </Provider>
