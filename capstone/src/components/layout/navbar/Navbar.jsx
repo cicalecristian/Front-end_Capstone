@@ -157,7 +157,7 @@ const Navbar = () => {
                     <Button
                       className="jm jm-dropdown__item"
                       onClick={() => {
-                        navigate("/login")
+                        navigate("/")
                         setDropdownOpen(false)
                       }}
                     >

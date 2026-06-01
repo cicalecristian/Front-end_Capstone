@@ -10,6 +10,8 @@ import EventDetails from "./components/pages/EventDetails/EventDetails.jsx"
 import FavoritesPage from "./components/pages/FavoritePage/FavoritePage.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
 import SearchPage from "./components/pages/SearchPage/SearchPage.jsx"
+import ProfilePage from "./components/pages/ProfilePage/ProfilePage.jsx"
+import EditProfile from "./components/pages/ProfilePage/editProfile/editProfile.jsx"
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
       </Routes>
     </Provider>
