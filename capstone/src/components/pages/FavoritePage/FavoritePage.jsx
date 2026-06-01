@@ -7,6 +7,7 @@ import {
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { FaHeart, FaCircleExclamation } from "react-icons/fa6"
+import Navbar from "../../layout/navbar/Navbar"
 import "./FavoritePage.css"
 
 const FavoritesPage = () => {
@@ -43,65 +44,70 @@ const FavoritesPage = () => {
   }
 
   return (
-    <Container fluid className="favorites-page py-5 px-4">
-      <div className="mb-5 text-center">
-        <h1 className="favorites-title">Your Favorite Songs</h1>
+    <>
+      <Navbar />
+      <Container fluid className="favorites-page py-5 px-4">
+        <div className="mb-5 text-center">
+          <h1 className="favorites-title">Your Favorite Songs</h1>
 
-        <p className="favorites-subtitle">
-          All the music you love, in one place.
-        </p>
-      </div>
-
-      {!favorites.length ? (
-        <div className="empty-favorites">
-          <FaHeart className="empty-heart" />
-
-          <h3>No favorite songs yet</h3>
-
-          <p>Start adding songs you love.</p>
+          <p className="favorites-subtitle">
+            All the music you love, in one place.
+          </p>
         </div>
-      ) : (
-        <Row className="g-4">
-          {favorites.map((favorite) => (
-            <Col xs={6} md={4} lg={3} xl={2} key={favorite.id}>
-              <Card className="favorite-card h-100">
-                <Link
-                  to={`/songs/${favorite.songId}`}
-                  className="text-decoration-none"
-                >
-                  <img
-                    src={favorite.cover}
-                    alt={favorite.title}
-                    className="favorite-cover"
-                  />
-                </Link>
 
-                <Card.Body className="d-flex flex-column">
-                  <h5 className="favorite-song-title text-truncate">
-                    {favorite.title}
-                  </h5>
+        {!favorites.length ? (
+          <div className="empty-favorites">
+            <FaHeart className="empty-heart" />
 
-                  <p className="favorite-artists">
-                    {favorite.artists
-                      .map((artist) => artist.artistName)
-                      .join(", ")}
-                  </p>
+            <h3>No favorite songs yet</h3>
 
-                  <p className="favorite-genre">{favorite.genre}</p>
-
-                  <Button
-                    className="remove-favorite-btn mt-auto"
-                    onClick={() => dispatch(removeFavoriteAction(favorite.id))}
+            <p>Start adding songs you love.</p>
+          </div>
+        ) : (
+          <Row className="g-4">
+            {favorites.map((favorite) => (
+              <Col xs={6} md={4} lg={3} xl={2} key={favorite.id}>
+                <Card className="favorite-card h-100">
+                  <Link
+                    to={`/songs/${favorite.songId}`}
+                    className="text-decoration-none"
                   >
-                    <FaHeart />
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      )}
-    </Container>
+                    <img
+                      src={favorite.cover}
+                      alt={favorite.title}
+                      className="favorite-cover"
+                    />
+                  </Link>
+
+                  <Card.Body className="d-flex flex-column">
+                    <h5 className="favorite-song-title text-truncate">
+                      {favorite.title}
+                    </h5>
+
+                    <p className="favorite-artists">
+                      {favorite.artists
+                        .map((artist) => artist.artistName)
+                        .join(", ")}
+                    </p>
+
+                    <p className="favorite-genre">{favorite.genre}</p>
+
+                    <Button
+                      className="remove-favorite-btn mt-auto"
+                      onClick={() =>
+                        dispatch(removeFavoriteAction(favorite.id))
+                      }
+                    >
+                      <FaHeart />
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+      </Container>
+    </>
   )
 }
 

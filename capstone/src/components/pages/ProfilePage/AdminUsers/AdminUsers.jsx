@@ -59,12 +59,12 @@ const AdminUsers = () => {
   return (
     <div className="admin-users">
       <h1 className="admin-users__heading">
-        Gestione <span>utenti</span>
+        <span>User</span> management
       </h1>
-      <p className="admin-users__meta">ADMIN · UTENTI</p>
+      <p className="admin-users__meta">ADMIN · USERS</p>
 
       {users.length === 0 ? (
-        <p className="admin-users__empty">Nessun utente trovato.</p>
+        <p className="admin-users__empty">No users found.</p>
       ) : (
         <div className="admin-users__grid">
           {users.map((user) => (
@@ -89,7 +89,7 @@ const AdminUsers = () => {
                   <span
                     className={`admin-users__badge ${user.role === "ROLE_ADMIN" ? "admin-users__badge--admin" : "admin-users__badge--user"}`}
                   >
-                    {user.role === "ROLE_ADMIN" ? "Admin" : "Utente"}
+                    {user.role === "ROLE_ADMIN" ? "Admin" : "User"}
                   </span>
                 </div>
               </div>
@@ -99,14 +99,14 @@ const AdminUsers = () => {
                   onClick={() => handleChangeRole(user.id, user.role)}
                 >
                   {user.role === "ROLE_ADMIN"
-                    ? "⬇️ Rendi utente"
-                    : "⬆️ Rendi admin"}
+                    ? "⬇️ Make user"
+                    : "⬆️ Make admin"}
                 </button>
                 <button
                   className="profile-btn profile-btn--danger"
                   onClick={() => handleDeleteClick(user)}
                 >
-                  🗑️ Elimina
+                  Delete
                 </button>
               </div>
             </div>
@@ -117,12 +117,11 @@ const AdminUsers = () => {
       {confirmToast && (
         <div className="confirm-overlay">
           <div className="confirm-toast">
-            <p className="confirm-toast__label">CONFERMA ELIMINAZIONE</p>
-            <h4 className="confirm-toast__title">Sei sicuro?</h4>
+            <p className="confirm-toast__label">CONFIRM DELETION</p>
+            <h4 className="confirm-toast__title">Are you sure?</h4>
             <p className="confirm-toast__text">
-              Stai per eliminare l'account di{" "}
-              <strong>{confirmToast.userName}</strong>. Questa azione è
-              irreversibile.
+              You are about to delete <strong>{confirmToast.userName}</strong>'s
+              account. This action is irreversible.
             </p>
             <div className="confirm-toast__actions">
               <button
@@ -130,14 +129,14 @@ const AdminUsers = () => {
                 onClick={() => setConfirmToast(null)}
                 disabled={loading}
               >
-                Annulla
+                Cancel
               </button>
               <button
                 className="profile-btn profile-btn--danger"
                 onClick={handleConfirmDelete}
                 disabled={loading}
               >
-                {loading ? "Eliminazione..." : "Elimina"}
+                {loading ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

@@ -88,7 +88,7 @@
 .admin-users__info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
   min-width: 0;
 }
 
@@ -112,13 +112,17 @@
 }
 
 .admin-users__badge {
-  display: inline-block;
+  width: fit-content;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 3px 10px;
-  border-radius: 99px;
+  border-radius: 100px;
 }
 
 .admin-users__badge--admin {
@@ -196,7 +200,112 @@
   margin-top: 8px;
 }
 
-.confirm-toast__actions .profile-btn {
+.confirm-toast__actions {
   flex: 1;
   justify-content: center;
+}
+
+.profile-btn.profile-btn--ghost {
+  width: 150px;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .admin-users {
+    padding: 2rem 1rem;
+  }
+
+  .admin-users__meta {
+    margin-bottom: 1.4rem;
+  }
+
+  .admin-users__card {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .admin-users__card-left {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .admin-users__avatar,
+  .admin-users__initials {
+    width: 46px;
+    height: 46px;
+  }
+
+  .admin-users__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .admin-users__name,
+  .admin-users__sub {
+    max-width: 100%;
+  }
+
+  .admin-users__actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-users__actions .profile-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-btn.profile-btn--ghost {
+    width: 100%;
+  }
+
+  .confirm-toast {
+    width: calc(100% - 2rem);
+    padding: 24px 20px;
+  }
+
+  .confirm-toast__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .confirm-toast__actions .profile-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .admin-users {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .admin-users__card-left {
+    gap: 10px;
+  }
+
+  .admin-users__avatar,
+  .admin-users__initials {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
+  }
+
+  .admin-users__name {
+    font-size: 0.9rem;
+  }
+
+  .admin-users__sub {
+    font-size: 0.75rem;
+  }
+
+  .admin-users__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .confirm-toast__actions {
+    grid-template-columns: 1fr;
+  }
 }

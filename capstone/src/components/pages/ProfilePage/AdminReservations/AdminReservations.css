@@ -146,4 +146,47 @@
     width: 100%;
     justify-content: center;
   }
+
+  .admin-reservations {
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-reservations__meta {
+    margin-bottom: 1.4rem;
+  }
+
+  .admin-reservations__card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .admin-reservations__card-left {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .admin-reservations__icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+  }
+
+  .admin-reservations__info {
+    width: 100%;
+  }
+
+  .admin-reservations__name,
+  .admin-reservations__sub {
+    max-width: 100%;
+  }
+
+  .admin-reservations__actions {
+    width: 100%;
+  }
+
+  .admin-reservations__actions .profile-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

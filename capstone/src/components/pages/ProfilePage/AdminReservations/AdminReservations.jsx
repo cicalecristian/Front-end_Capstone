@@ -58,15 +58,13 @@ const AdminReservations = () => {
   return (
     <div className="admin-reservations">
       <h1 className="admin-reservations__heading">
-        Gestisci <span>prenotazioni</span>
+        <span>Reservations</span> management
       </h1>
 
       <p className="admin-reservations__meta">ADMIN · RESERVATIONS</p>
 
       {reservationList.length === 0 ? (
-        <p className="admin-reservations__empty">
-          Nessuna prenotazione trovata.
-        </p>
+        <p className="admin-reservations__empty">No reservations found.</p>
       ) : (
         <div className="admin-reservations__grid">
           {reservationList.map((reservation) => (
@@ -76,7 +74,7 @@ const AdminReservations = () => {
 
                 <div className="admin-reservations__info">
                   <p className="admin-reservations__name">
-                    Prenotazione #{reservation.id}
+                    Reservation #{reservation.id}
                   </p>
 
                   <p className="admin-reservations__sub">
@@ -104,7 +102,7 @@ const AdminReservations = () => {
                   onClick={() => setReservationToDelete(reservation)}
                   disabled={loading}
                 >
-                  🗑️ Elimina
+                  Delete
                 </button>
               </div>
             </div>
@@ -115,14 +113,14 @@ const AdminReservations = () => {
       {reservationToDelete && (
         <div className="confirm-overlay">
           <div className="confirm-toast">
-            <p className="confirm-toast__label">CONFERMA ELIMINAZIONE</p>
+            <p className="confirm-toast__label">CONFIRM DELETION</p>
 
-            <h4 className="confirm-toast__title">Eliminare prenotazione?</h4>
+            <h4 className="confirm-toast__title">Delete reservation?</h4>
 
             <p className="confirm-toast__text">
-              Stai per eliminare la prenotazione{" "}
-              <strong>#{reservationToDelete.id}</strong>. Questa azione è
-              irreversibile.
+              You are about to cancel the reservation{" "}
+              <strong>#{reservationToDelete.id}</strong>. This action is
+              irreversible.
             </p>
 
             <div className="confirm-toast__actions">
@@ -139,7 +137,7 @@ const AdminReservations = () => {
                 onClick={handleConfirmDelete}
                 disabled={loading}
               >
-                {loading ? "Eliminazione..." : "Elimina"}
+                {loading ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

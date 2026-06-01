@@ -59,7 +59,7 @@ const ProfilePage = () => {
     return (
       <div className="loading-container">
         <Spinner animation="border" className="custom-spinner" />
-        <p className="loading-text">Caricamento profilo...</p>
+        <p className="loading-text">loading profile...</p>
       </div>
     )
   }
@@ -70,9 +70,9 @@ const ProfilePage = () => {
   return (
     <div className="profile-page">
       <h1 className="profile-page__heading">
-        Il mio <span>profilo</span>
+        My <span>profile</span>
       </h1>
-      <p className="profile-page__meta">ACCOUNT · IMPOSTAZIONI</p>
+      <p className="profile-page__meta">ACCOUNT · SETTINGS</p>
 
       <div className="profile-hero">
         {profile.avatar ? (
@@ -92,17 +92,17 @@ const ProfilePage = () => {
           <span
             className={`profile-badge ${isAdmin ? "profile-badge--admin" : "profile-badge--user"}`}
           >
-            {isAdmin ? "Admin" : "Utente"}
+            {isAdmin ? "Admin" : "User"}
           </span>
         </div>
       </div>
 
-      <p className="profile-section-label">Informazioni personali</p>
+      <p className="profile-section-label">Personal information</p>
       <div className="profile-grid">
         <div className="profile-row">
           <div className="profile-row__icon">👤</div>
           <div>
-            <span className="profile-row__label">Nome completo</span>
+            <span className="profile-row__label">Full name</span>
             <span className="profile-row__value">
               {profile.name} {profile.surname}
             </span>
@@ -118,7 +118,7 @@ const ProfilePage = () => {
         <div className="profile-row">
           <div className="profile-row__icon">📅</div>
           <div>
-            <span className="profile-row__label">Data di nascita</span>
+            <span className="profile-row__label">Date of birth</span>
             <span className="profile-row__value">{profile.dateOfBirth}</span>
           </div>
         </div>
@@ -133,9 +133,9 @@ const ProfilePage = () => {
 
       {isAdmin && (
         <>
-          <p className="profile-section-label">Area admin</p>
+          <p className="profile-section-label">Admin area</p>
           <div className="profile-admin">
-            <p className="profile-admin__title">⭐ Strumenti amministratore</p>
+            <p className="profile-admin__title">⭐ Administrator tools</p>
             <div className="profile-grid">
               <div
                 className="profile-row"
@@ -143,9 +143,9 @@ const ProfilePage = () => {
               >
                 <div className="profile-row__icon">👥</div>
                 <div>
-                  <span className="profile-row__label">Gestisci utenti</span>
+                  <span className="profile-row__label">Manage users</span>
                   <span className="profile-row__value">
-                    Visualizza, modifica o elimina account
+                    View, edit, or delete accounts
                   </span>
                 </div>
               </div>
@@ -155,12 +155,8 @@ const ProfilePage = () => {
               >
                 <div className="profile-row__icon">📋</div>
                 <div>
-                  <span className="profile-row__label">
-                    Prenotazioni globali
-                  </span>
-                  <span className="profile-row__value">
-                    Visualizza tutte le prenotazioni
-                  </span>
+                  <span className="profile-row__label">Global bookings</span>
+                  <span className="profile-row__value">View all bookings</span>
                 </div>
               </div>
               <div
@@ -169,9 +165,9 @@ const ProfilePage = () => {
               >
                 <div className="profile-row__icon">🎵</div>
                 <div>
-                  <span className="profile-row__label">Gestisci contenuti</span>
+                  <span className="profile-row__label">Manage content</span>
                   <span className="profile-row__value">
-                    Artisti, eventi, canzoni
+                    Artists, events, songs
                   </span>
                 </div>
               </div>
@@ -180,35 +176,35 @@ const ProfilePage = () => {
         </>
       )}
 
-      <p className="profile-section-label">Azioni</p>
+      <p className="profile-section-label">Actions</p>
       <div className="profile-actions">
         <button
           className="profile-btn profile-btn--edit"
           onClick={() => navigate("/profile/edit")}
         >
-          ✏️ Modifica profilo
+          Edit profile
         </button>
         <button
           className="profile-btn profile-btn--ghost"
           onClick={handleLogout}
         >
-          🚪 Logout
+          Logout
         </button>
         <button
           className="profile-btn profile-btn--danger"
           onClick={() => setShowDeleteToast(true)}
         >
-          🗑️ Elimina account
+          Delete account
         </button>
       </div>
 
       {showDeleteToast && (
         <div className="confirm-overlay">
           <div className="confirm-toast">
-            <p className="confirm-toast__label">CONFERMA ELIMINAZIONE</p>
-            <h4 className="confirm-toast__title">Sei sicuro?</h4>
+            <p className="confirm-toast__label">CONFIRM DELETION</p>
+            <h4 className="confirm-toast__title">Are you sure?</h4>
             <p className="confirm-toast__text">
-              Stai per eliminare il tuo account. Questa azione è irreversibile.
+              You are about to delete your account. This action is irreversible.
             </p>
             <div className="confirm-toast__actions">
               <button
@@ -216,14 +212,14 @@ const ProfilePage = () => {
                 onClick={() => setShowDeleteToast(false)}
                 disabled={loading}
               >
-                Annulla
+                Cancel
               </button>
               <button
                 className="profile-btn profile-btn--danger"
                 onClick={handleConfirmDelete}
                 disabled={loading}
               >
-                {loading ? "Eliminazione..." : "Elimina"}
+                {loading ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

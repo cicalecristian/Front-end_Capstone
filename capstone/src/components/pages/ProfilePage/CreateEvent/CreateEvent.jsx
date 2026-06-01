@@ -123,8 +123,8 @@ const CreateEvent = () => {
       setConfirmAction(null)
       setSuccessMessage(
         isUpdate
-          ? "Evento aggiornato con successo."
-          : "Evento creato con successo.",
+          ? "Event successfully updated."
+          : "Event created successfully.",
       )
     }
   }
@@ -142,7 +142,7 @@ const CreateEvent = () => {
 
       setEventToDelete(null)
       setConfirmAction(null)
-      setSuccessMessage("Evento eliminato con successo.")
+      setSuccessMessage("Event successfully deleted.")
     }
   }
 
@@ -176,10 +176,10 @@ const CreateEvent = () => {
   return (
     <div className="create-event">
       <h1 className="create-event__heading">
-        {selectedEvent ? "Modifica" : "Crea"} <span>evento</span>
+        {selectedEvent ? "Edit" : "Create"} <span>event</span>
       </h1>
 
-      <p className="create-event__meta">ADMIN · EVENTI</p>
+      <p className="create-event__meta">ADMIN · EVENTS</p>
 
       {error && (
         <div className="create-event__error">
@@ -189,11 +189,11 @@ const CreateEvent = () => {
       )}
 
       <Form onSubmit={handleSubmit}>
-        <p className="create-event__section-label">Informazioni evento</p>
+        <p className="create-event__section-label">Event information</p>
 
         <div className="create-event__grid">
           <div className="create-event__field">
-            <label className="create-event__label">Titolo</label>
+            <label className="create-event__label">Title</label>
             <input
               className="create-event__input"
               type="text"
@@ -207,7 +207,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="create-event__field">
-            <label className="create-event__label">Città</label>
+            <label className="create-event__label">City</label>
             <input
               className="create-event__input"
               type="text"
@@ -221,7 +221,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="create-event__field">
-            <label className="create-event__label">Paese</label>
+            <label className="create-event__label">Country</label>
             <input
               className="create-event__input"
               type="text"
@@ -235,7 +235,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="create-event__field">
-            <label className="create-event__label">Data</label>
+            <label className="create-event__label">Date</label>
             <input
               className="create-event__input"
               type="date"
@@ -248,7 +248,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="create-event__field">
-            <label className="create-event__label">Posti disponibili</label>
+            <label className="create-event__label">Seats available</label>
 
             <div className="create-event__number-control">
               <input
@@ -302,7 +302,7 @@ const CreateEvent = () => {
               name="cover"
               value={formData.cover}
               onChange={handleChange}
-              placeholder="URL immagine cover"
+              placeholder="URL cover image"
             />
           </div>
         </div>
@@ -313,16 +313,16 @@ const CreateEvent = () => {
             className="profile-btn profile-btn--edit"
             disabled={loading}
           >
-            {selectedEvent ? "💾 Salva modifiche" : "💾 Crea evento"}
+            {selectedEvent ? " Save changes" : " Create event"}
           </button>
 
           <button
             type="button"
-            className="profile-btn profile-btn--ghost"
+            className="profile-btn profile-btn--ghost event__btn"
             onClick={handleReset}
             disabled={loading}
           >
-            ✕ Reset
+            Reset
           </button>
         </div>
 
@@ -332,11 +332,11 @@ const CreateEvent = () => {
       </Form>
 
       <p className="create-event__section-label create-event__list-title">
-        Eventi esistenti
+        Existing events
       </p>
 
       {eventList.length === 0 ? (
-        <p className="create-event__empty">Nessun evento trovato.</p>
+        <p className="create-event__empty">No events found.</p>
       ) : (
         <div className="create-event__list">
           {eventList.map((event) => (
@@ -350,7 +350,7 @@ const CreateEvent = () => {
                     {event.city}, {event.country} · {event.date}
                   </p>
                   <span className="create-event__badge">
-                    {event.seat} posti
+                    {event.seat} seats
                   </span>
                 </div>
               </div>
@@ -358,11 +358,11 @@ const CreateEvent = () => {
               <div className="create-event__card-actions">
                 <button
                   type="button"
-                  className="profile-btn profile-btn--ghost"
+                  className="profile-btn profile-btn--ghost  event__edit-btn"
                   onClick={() => handleEdit(event)}
                   disabled={loading}
                 >
-                  ✏️ Modifica
+                  Edit
                 </button>
 
                 <button
@@ -371,7 +371,7 @@ const CreateEvent = () => {
                   onClick={() => handleAskDelete(event)}
                   disabled={loading}
                 >
-                  🗑️ Elimina
+                  Delete
                 </button>
               </div>
             </div>
@@ -382,26 +382,27 @@ const CreateEvent = () => {
       {confirmAction && (
         <div className="confirm-overlay">
           <div className="confirm-toast">
-            <p className="confirm-toast__label">CONFERMA</p>
+            <p className="confirm-toast__label">CONFIRM</p>
 
             <h4 className="confirm-toast__title">
               {confirmAction === "delete"
-                ? "Eliminare evento?"
+                ? "Delete event?"
                 : selectedEvent
-                  ? "Salvare modifiche?"
-                  : "Creare evento?"}
+                  ? "Save changes?"
+                  : "Create event?"}
             </h4>
 
             <p className="confirm-toast__text">
               {confirmAction === "delete" ? (
                 <>
-                  Stai per eliminare <strong>{eventToDelete?.title}</strong>.
-                  Questa azione è irreversibile.
+                  You are about to delete{" "}
+                  <strong>{eventToDelete?.title}</strong>. This action is
+                  irreversible.
                 </>
               ) : (
                 <>
-                  Stai per {selectedEvent ? "modificare" : "creare"}{" "}
-                  <strong>{formData.title}</strong> a{" "}
+                  You're going to {selectedEvent ? "edit" : "create"}{" "}
+                  <strong>{formData.title}</strong> in{" "}
                   <strong>{formData.city}</strong>.
                 </>
               )}
@@ -413,7 +414,7 @@ const CreateEvent = () => {
                 onClick={closeConfirmToast}
                 disabled={loading}
               >
-                Annulla
+                Cancel
               </button>
 
               <button
@@ -429,7 +430,7 @@ const CreateEvent = () => {
                 }
                 disabled={loading}
               >
-                {loading ? "Attendi..." : "Conferma"}
+                {loading ? "Please wait..." : "Confirm"}
               </button>
             </div>
           </div>
