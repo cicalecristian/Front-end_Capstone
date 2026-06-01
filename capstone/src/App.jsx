@@ -15,25 +15,32 @@ import EditProfile from "./components/pages/ProfilePage/editProfile/editProfile.
 import AdminUsers from "./components/pages/ProfilePage/AdminUsers/AdminUsers.jsx"
 import AdminReservations from "./components/pages/ProfilePage/AdminReservations/AdminReservations.jsx"
 import CreateEvent from "./components/pages/ProfilePage/CreateEvent/CreateEvent.jsx"
+import MainLayout from "./components/layout/MainLayout.jsx"
+import ScrollToTop from "./components/layout/ScrollToTop.jsx"
 
 function App() {
   return (
     <Provider store={store}>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/songs/:id" element={<SongDetails />} />
-          <Route path="/artists/:id" element={<ArtistDetails />} />
-          <Route path="/events/:id" element={<EventDetails />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/reservations" element={<AdminReservations />} />
-          <Route path="/admin/content" element={<CreateEvent />} />
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/songs/:id" element={<SongDetails />} />
+            <Route path="/artists/:id" element={<ArtistDetails />} />
+            <Route path="/events/:id" element={<EventDetails />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/reservations" element={<AdminReservations />} />
+            <Route path="/admin/content" element={<CreateEvent />} />
+          </Route>
         </Route>
       </Routes>
     </Provider>

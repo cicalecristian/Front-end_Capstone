@@ -67,12 +67,12 @@ const EditProfileForm = ({ profile, loading }) => {
   return (
     <div className="edit-profile-page">
       <h1 className="edit-profile-page__heading">
-        Modifica <span>profilo</span>
+        Edit <span>profile</span>
       </h1>
 
-      <p className="edit-profile-page__meta">ACCOUNT · IMPOSTAZIONI</p>
+      <p className="edit-profile-page__meta">ACCOUNT · SETTINGS</p>
 
-      <p className="profile-section-label">Foto profilo</p>
+      <p className="profile-section-label">Profile photo</p>
 
       <div className="edit-avatar">
         {avatarPreview ? (
@@ -83,7 +83,7 @@ const EditProfileForm = ({ profile, loading }) => {
 
         <div className="edit-avatar__actions">
           <label className="profile-btn profile-btn--ghost edit-avatar__label">
-            📷 Cambia foto
+            📷 Change photo
             <input
               type="file"
               accept="image/*"
@@ -92,35 +92,35 @@ const EditProfileForm = ({ profile, loading }) => {
             />
           </label>
 
-          <p className="edit-avatar__hint">JPG, PNG o WebP — max 5MB</p>
+          <p className="edit-avatar__hint">JPG, PNG or WebP — max 5MB</p>
         </div>
       </div>
 
       <Form onSubmit={handleSubmit}>
-        <p className="profile-section-label">Informazioni personali</p>
+        <p className="profile-section-label">Personal information</p>
 
         <div className="edit-grid">
           <div className="edit-field">
-            <label className="edit-field__label">Nome</label>
+            <label className="edit-field__label">Name</label>
             <input
               className="edit-field__input"
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Il tuo nome"
+              placeholder="Your name"
             />
           </div>
 
           <div className="edit-field">
-            <label className="edit-field__label">Cognome</label>
+            <label className="edit-field__label">Surname</label>
             <input
               className="edit-field__input"
               type="text"
               name="surname"
               value={formData.surname}
               onChange={handleChange}
-              placeholder="Il tuo cognome"
+              placeholder="Your surname"
             />
           </div>
 
@@ -132,7 +132,7 @@ const EditProfileForm = ({ profile, loading }) => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Il tuo username"
+              placeholder="Your username"
             />
           </div>
 
@@ -144,24 +144,24 @@ const EditProfileForm = ({ profile, loading }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="La tua email"
+              placeholder="Your email"
             />
           </div>
 
           <div className="edit-field">
-            <label className="edit-field__label">Nuova password</label>
+            <label className="edit-field__label">New Password</label>
             <input
               className="edit-field__input"
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Lascia vuoto per non cambiarla"
+              placeholder="Leave it blank so it doesn't change"
             />
           </div>
 
           <div className="edit-field">
-            <label className="edit-field__label">Data di nascita</label>
+            <label className="edit-field__label">Date of birth</label>
             <input
               className="edit-field__input"
               type="date"
@@ -178,15 +178,15 @@ const EditProfileForm = ({ profile, loading }) => {
             className="profile-btn profile-btn--edit"
             disabled={loading}
           >
-            {loading ? "Salvataggio..." : "💾 Salva modifiche"}
+            {loading ? "Saving..." : "Save changes"}
           </button>
 
           <button
             type="button"
-            className="profile-btn profile-btn--ghost"
+            className="profile-btn profile-btn--ghost cancel-button"
             onClick={() => navigate("/profile")}
           >
-            ✕ Annulla
+            Cancel
           </button>
         </div>
       </Form>
@@ -234,7 +234,7 @@ const EditProfile = () => {
     return (
       <div className="loading-container">
         <Spinner animation="border" className="custom-spinner" />
-        <p className="loading-text">Caricamento profilo...</p>
+        <p className="loading-text">Loading profile...</p>
       </div>
     )
   }

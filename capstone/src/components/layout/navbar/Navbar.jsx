@@ -40,7 +40,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logoutAction())
     setDropdownOpen(false)
-    navigate("/login")
+    navigate("/")
   }
 
   const handleLogoClick = () => {

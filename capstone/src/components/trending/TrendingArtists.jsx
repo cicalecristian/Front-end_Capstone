@@ -10,8 +10,11 @@ const TrendingArtists = ({ artists }) => {
 
   return (
     <>
-      <div>
-        <h3 className="fst-italic m-0 px-3">TRENDING ARTISTS</h3>
+      <div className="section-heading">
+        <p className="section-heading__meta">DISCOVER · ARTISTS</p>
+        <h3 className="section-heading__title">
+          Trending <span>artists</span>
+        </h3>
       </div>
 
       <Swiper

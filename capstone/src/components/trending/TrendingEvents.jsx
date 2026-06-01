@@ -10,8 +10,11 @@ const TrendingEvents = ({ events }) => {
 
   return (
     <>
-      <div>
-        <h3 className="fst-italic m-0 px-3">TRENDING EVENTS</h3>
+      <div className="section-heading">
+        <p className="section-heading__meta">DISCOVER · EVENTS</p>
+        <h3 className="section-heading__title">
+          Trending <span>events</span>
+        </h3>
       </div>
 
       <Swiper

@@ -185,7 +185,7 @@ const ProfilePage = () => {
           Edit profile
         </button>
         <button
-          className="profile-btn profile-btn--ghost"
+          className="profile-btn profile-btn--ghost profile-logout-button"
           onClick={handleLogout}
         >
           Logout

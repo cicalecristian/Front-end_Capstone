@@ -191,6 +191,10 @@
   background: rgba(220, 60, 60, 0.08);
 }
 
+.profile-btn.profile-btn--ghost.profile-logout-button {
+  width: 90px;
+}
+
 .confirm-overlay {
   position: fixed;
   inset: 0;

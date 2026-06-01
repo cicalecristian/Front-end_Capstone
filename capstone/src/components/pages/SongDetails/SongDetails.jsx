@@ -76,7 +76,7 @@ const SongDetails = () => {
   return (
     <Container fluid className="song-details-page">
       <Row className="justify-content-center align-items-center min-vh-100">
-        <Col xs={11} md={9} lg={7} xl={5} className="text-center my-4">
+        <Col xs={11} md={9} lg={7} xl={5} className="text-center my-5">
           <div className="song-details-card">
             <img
               src={song.cover}

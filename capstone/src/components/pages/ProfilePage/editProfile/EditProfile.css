@@ -87,6 +87,17 @@
   cursor: pointer;
 }
 
+.edit-field__input:-webkit-autofill,
+.edit-field__input:-webkit-autofill:hover,
+.edit-field__input:-webkit-autofill:focus,
+.edit-field__input:-webkit-autofill:active {
+  -webkit-text-fill-color: #f5f5f5;
+  caret-color: #f5f5f5;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset;
+  border-color: rgba(40, 217, 240, 0.35);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .edit-avatar {
   display: flex;
   align-items: center;
@@ -126,6 +137,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 
 .edit-avatar__label {
@@ -136,4 +148,16 @@
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.25);
   padding-left: 4px;
+}
+
+.profile-btn.profile-btn--ghost.cancel-button {
+  width: 80px;
+}
+
+.profile-btn.profile-btn--ghost.edit-avatar__label {
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }

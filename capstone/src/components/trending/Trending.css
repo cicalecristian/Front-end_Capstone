@@ -6,7 +6,8 @@
 .swiper {
   overflow-y: visible;
   overflow-x: clip;
-  padding: 20px 10px;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 
 .song-title,
@@ -37,4 +38,45 @@
 .card-effect:hover {
   transform: scale(1.03);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.section-heading {
+  padding: 0 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-heading__meta {
+  margin: 0 0 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.section-heading__title {
+  position: relative;
+  width: fit-content;
+  margin: 0;
+  padding-bottom: 0.7rem;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #f5f5f5;
+}
+
+.section-heading__title span {
+  color: #28d9f0;
+}
+
+.section-heading__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 72%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #28d9f0 0%, rgba(40, 217, 240, 0.12) 100%);
 }

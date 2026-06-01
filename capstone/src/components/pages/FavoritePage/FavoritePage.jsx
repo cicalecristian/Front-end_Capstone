@@ -7,7 +7,6 @@ import {
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { FaHeart, FaCircleExclamation } from "react-icons/fa6"
-import Navbar from "../../layout/navbar/Navbar"
 import "./FavoritePage.css"
 
 const FavoritesPage = () => {
@@ -45,7 +44,6 @@ const FavoritesPage = () => {
 
   return (
     <>
-      <Navbar />
       <Container fluid className="favorites-page py-5 px-4">
         <div className="mb-5 text-center">
           <h1 className="favorites-title">Your Favorite Songs</h1>
