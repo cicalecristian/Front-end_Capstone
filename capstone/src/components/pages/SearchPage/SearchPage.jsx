@@ -5,7 +5,6 @@ import { getSongsAction } from "../../../redux/actions/songAction"
 import { getArtistsAction } from "../../../redux/actions/artistAction"
 import { getEventsAction } from "../../../redux/actions/eventAction"
 import "./SearchPage.css"
-import Navbar from "../../layout/navbar/Navbar"
 
 const SearchPage = () => {
   const dispatch = useDispatch()
@@ -106,24 +105,21 @@ const SearchPage = () => {
   }
 
   return (
-    <>
-      <Navbar />
-      <div className="search-page">
-        <h1 className="search-page__heading">
-          Results for <span>"{searchParams.get("q")}"</span>
-        </h1>
-        <p className="search-page__meta">
-          {results.length} {type}
-          {results.length !== 1 ? "s" : ""} found
-        </p>
+    <div className="search-page">
+      <h1 className="search-page__heading">
+        Results for <span>"{searchParams.get("q")}"</span>
+      </h1>
+      <p className="search-page__meta">
+        {results.length} {type}
+        {results.length !== 1 ? "s" : ""} found
+      </p>
 
-        {results.length === 0 ? (
-          <p className="search-page__empty">No {type}s match your search.</p>
-        ) : (
-          <div className="search-grid">{results.map(renderCard)}</div>
-        )}
-      </div>
-    </>
+      {results.length === 0 ? (
+        <p className="search-page__empty">No {type}s match your search.</p>
+      ) : (
+        <div className="search-grid">{results.map(renderCard)}</div>
+      )}
+    </div>
   )
 }
 

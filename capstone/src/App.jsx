@@ -17,6 +17,7 @@ import AdminReservations from "./components/pages/ProfilePage/AdminReservations/
 import CreateEvent from "./components/pages/ProfilePage/CreateEvent/CreateEvent.jsx"
 import MainLayout from "./components/layout/MainLayout.jsx"
 import ScrollToTop from "./components/layout/ScrollToTop.jsx"
+import ReservationPage from "./components/pages/ReservationPage/ReservationPage.jsx"
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/reservations" element={<AdminReservations />} />
             <Route path="/admin/content" element={<CreateEvent />} />
+            <Route path="/reservations" element={<ReservationPage />} />
           </Route>
         </Route>
       </Routes>

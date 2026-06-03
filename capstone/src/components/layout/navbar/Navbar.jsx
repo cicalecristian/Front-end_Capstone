@@ -100,7 +100,7 @@ const Navbar = () => {
 
           <Button
             className="jm jm-icon-btn jm-icon-btn--calendar"
-            onClick={() => navigate("/bookings")}
+            onClick={() => navigate("/reservations")}
             title="Booked Events"
           >
             <svg

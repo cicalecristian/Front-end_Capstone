@@ -1,11 +1,15 @@
 export const GET_REVIEWS = "GET_REVIEWS"
 export const GET_REVIEWS_LOADING = "GET_REVIEWS_LOADING"
 export const GET_REVIEWS_ERROR = "GET_REVIEWS_ERROR"
+
 export const GET_AVERAGE_RATING = "GET_AVERAGE_RATING"
+
 export const ADD_REVIEW = "ADD_REVIEW"
 export const ADD_REVIEW_ERROR = "ADD_REVIEW_ERROR"
+
 export const UPDATE_REVIEW = "UPDATE_REVIEW"
 export const UPDATE_REVIEW_ERROR = "UPDATE_REVIEW_ERROR"
+
 export const CLEAR_REVIEW_ERROR = "CLEAR_REVIEW_ERROR"
 
 export const getReviewsAction = (songId) => {
