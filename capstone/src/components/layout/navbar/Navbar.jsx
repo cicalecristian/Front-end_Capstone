@@ -226,7 +226,7 @@ const Navbar = () => {
             <Button
               className="jm jm-mobile__link"
               onClick={() => {
-                navigate("/bookings")
+                navigate("/reservations")
                 setMobileMenuOpen(false)
               }}
             >

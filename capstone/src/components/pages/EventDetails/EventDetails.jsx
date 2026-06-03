@@ -128,7 +128,7 @@ const EventDetails = () => {
           </div>
         </div>
       )}
-      <Row className="justify-content-center align-items-center min-vh-100 px-3">
+      <Row className="justify-content-center align-items-center min-vh-100 p-2">
         <Col xs={12} lg={10} xl={9}>
           <div className="event-card-wrapper">
             <Row className="g-0 align-items-center">

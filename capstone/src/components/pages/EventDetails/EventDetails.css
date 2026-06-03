@@ -278,4 +278,9 @@
     width: 100%;
     max-width: 200px;
   }
+
+  .reservation-success,
+  .reservation-error {
+    align-self: center;
+  }
 }

@@ -18,6 +18,7 @@ import CreateEvent from "./components/pages/ProfilePage/CreateEvent/CreateEvent.
 import MainLayout from "./components/layout/MainLayout.jsx"
 import ScrollToTop from "./components/layout/ScrollToTop.jsx"
 import ReservationPage from "./components/pages/ReservationPage/ReservationPage.jsx"
+import ErrorPage from "./components/pages/ErrorPage/ErrorPage.jsx"
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<ErrorPage />} />
 
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>

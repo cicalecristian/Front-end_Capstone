@@ -21,15 +21,23 @@ const ReservationPage = () => {
 
   const [reservationToDelete, setReservationToDelete] = useState(null)
 
-  const currentUserId = currentUser?.id ?? currentUser?.userId
+  const currentUserId =
+    currentUser?.id ?? currentUser?.userId ?? currentUser?.sub
 
   const visibleReservations = useMemo(() => {
+    if (!Array.isArray(reservations)) return []
+
     if (!currentUserId) return []
 
-    return reservations.filter(
-      (res) => String(res.userId) === String(currentUserId),
-    )
+    return reservations.filter((res) => {
+      const reservationUserId = res.userId ?? res.user?.id
+
+      return String(reservationUserId) === String(currentUserId)
+    })
   }, [reservations, currentUserId])
+
+  console.log("currentUser", currentUser)
+  console.log("reservation", reservations[0])
 
   useEffect(() => {
     dispatch(getReservationsAction())
